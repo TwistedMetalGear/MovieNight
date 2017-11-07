@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Movie Night</string>
+    <string name="search">Search</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="no_saved_movies">Get started by adding a movie</string>
+    <string name="no_search_results">No results found</string>
+    <string name="movie_saved">Movie saved</string>
+    <string name="movie_updated">Movie updated</string>
+    <string name="my_thoughts">My Thoughts</string>
+    <string name="my_thoughts_hint">Enter your thoughts here</string>
+    <string name="sort">Sort</string>
+    <string name="title">Title</string>
+    <string name="release_date">Release Date</string>
+    <string name="modified_date">Modified Date</string>
+    <string name="user_rating">User Rating</string>
+    <string name="generic_error">Oops! Something went wrong.</string>
+    <string name="retry">Retry</string>
+    <string name="save_movie_error">Unable to save movie, please try again</string>
+    <string name="delete_movie_error">Unable to delete movie, please try again</string>
+    <string name="undo_delete_error">Unable to undo</string>
+    <string name="movie_deleted">Movie deleted</string>
+    <string name="undo">Undo</string>
+    <string name="movie_restored">Movie restored</string>
+</resources>

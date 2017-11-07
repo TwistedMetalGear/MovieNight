@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="net.silentbyte.movienight.viewmodel.MovieDetailViewModel"/>
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone"
+                app:visibility_boolean="@{viewModel.loading}">
+
+                <ProgressBar
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:indeterminate="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                app:visibility_boolean="@{viewModel.error}">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/generic_error"/>
+
+                <Button
+                    android:id="@+id/retry_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/retry"
+                    android:textAllCaps="false"
+                    android:onClick="@{() -> viewModel.onRetryClick()}"/>
+
+            </LinearLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingLeft="16dp">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.movie.title}"
+                        android:textSize="24sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Die Hard"/>
+
+                    <TextView
+                        android:id="@+id/release_year"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@{viewModel.movie.formattedReleaseYear}"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/title"
+                        app:layout_constraintStart_toEndOf="@+id/title"
+                        app:layout_constraintTop_toTopOf="@+id/title"
+                        tools:text="(1988)"/>
+
+                    <LinearLayout
+                        android:id="@+id/poster_overview_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/rating_bar">
+
+                        <ImageView
+                            android:id="@+id/poster"
+                            android:layout_width="wrap_content"
+                            android:layout_height="152dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                            app:url="@{viewModel.movie.posterUrl}"
+                            tools:src="@drawable/diehard"/>
+
+                        <TextView
+                            android:id="@+id/overview"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="16dp"
+                            android:text="@{viewModel.movie.overview}"
+                            android:textSize="14sp"
+                            tools:text="NYPD cop, John McClane's plan to reconcile with his estranged wife is thrown for a serious loop when minutes after he arrives at her office, the entire building is overtaken by a group of terrorists. With little help from the LAPD, wisecracking McClane sets out to single-handedly rescue the hostages and bring the bad guys down."/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/certification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@{viewModel.movie.certification}"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/title"
+                        tools:text="R"/>
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="|"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/certification"
+                        app:layout_constraintStart_toEndOf="@+id/certification"
+                        app:layout_constraintTop_toTopOf="@+id/certification"/>
+
+                    <TextView
+                        android:id="@+id/runtime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@{viewModel.movie.formattedRuntime}"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@+id/textView8"
+                        app:layout_constraintTop_toBottomOf="@+id/title"
+                        tools:text="2h 11min"/>
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="|"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/runtime"
+                        app:layout_constraintStart_toEndOf="@+id/runtime"
+                        app:layout_constraintTop_toTopOf="@+id/runtime"/>
+
+                    <TextView
+                        android:id="@+id/genre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@{viewModel.movie.genre}"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@+id/textView10"
+                        app:layout_constraintTop_toBottomOf="@+id/title"
+                        tools:text="Action, Thriller"/>
+
+                    <net.silentbyte.movienight.ui.widgets.SimpleRatingBar
+                        android:id="@+id/rating_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:rating="@{viewModel.userRating}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/certification"
+                        app:srb_numberOfStars="10"
+                        app:srb_starBorderWidth="4"
+                        app:srb_starSize="32dp"
+                        app:srb_stepSize=".5"/>
+
+                    <LinearLayout
+                        android:id="@+id/rating_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="@+id/title"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/title"
+                        app:visibility_boolean="@{viewModel.modified || viewModel.movie.updateTime != 0}">
+
+                        <net.silentbyte.movienight.ui.widgets.SimpleRatingBar
+                            android:id="@+id/rating_star"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="4dp"
+                            app:rating="@{viewModel.userRating / 10}"
+                            app:srb_numberOfStars="1"
+                            app:srb_starBorderWidth="4"
+                            app:srb_starSize="32dp"
+                            app:srb_stepSize=".01"/>
+
+                        <TextView
+                            android:id="@+id/rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            tools:text="@{viewModel.formattedUserRating}"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/user_review_heading"
+                        style="?android:listSeparatorTextViewStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/my_thoughts"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/poster_overview_container"/>
+
+                    <EditText
+                        android:id="@+id/user_review"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:gravity="top|start"
+                        android:hint="@string/my_thoughts_hint"
+                        android:text="@{viewModel.userReview}"
+                        android:inputType="textMultiLine|textCapSentences|textAutoComplete|textAutoCorrect"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/user_review_heading"/>
+
+                </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/save_movie_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            android:onClick="@{() -> viewModel.onSaveMovieClick()}"
+            android:src="@{viewModel.movie.updateTime == 0 ? @drawable/ic_add_white : @drawable/ic_check_white}"
+            app:elevation="4dp"
+            app:visibility_boolean="@{viewModel.modified &amp;&amp; !viewModel.loading &amp;&amp; !viewModel.error}"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>
