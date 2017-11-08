@@ -13,15 +13,13 @@ import net.silentbyte.movienight.tmdb.MovieApi;
  * As the user clicks through movies and performs searches, the current fragment will be replaced by the appropriate
  * new fragment. Only one fragment will be displayed at a time and a back stack will be maintained.
  */
-public class MainActivity extends AppCompatActivity implements FragmentHolder, FragmentManager.OnBackStackChangedListener
-{
+public class MainActivity extends AppCompatActivity implements FragmentHolder, FragmentManager.OnBackStackChangedListener {
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (MovieApi.API_KEY.equals("INSERT_API_KEY_HERE"))
-        {
+        if (MovieApi.API_KEY.equals("INSERT_API_KEY_HERE")) {
             setContentView(R.layout.missing_api_key);
             return;
         }
@@ -31,12 +29,11 @@ public class MainActivity extends AppCompatActivity implements FragmentHolder, F
         FragmentManager manager = getSupportFragmentManager();
         Fragment fragment = manager.findFragmentById(R.id.fragment_container);
 
-        if (fragment == null)
-        {
+        if (fragment == null) {
             fragment = MovieListFragment.newInstance(null);
             manager.beginTransaction()
-                .add(R.id.fragment_container, fragment)
-                .commit();
+                    .add(R.id.fragment_container, fragment)
+                    .commit();
         }
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -48,39 +45,35 @@ public class MainActivity extends AppCompatActivity implements FragmentHolder, F
     }
 
     @Override
-    public void show(Fragment fragment)
-    {
+    public void show(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
-            .replace(R.id.fragment_container, fragment).addToBackStack(null)
-            .commit();
+                .replace(R.id.fragment_container, fragment).addToBackStack(null)
+                .commit();
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
 
-        if (fragment instanceof MovieBaseFragment)
-            ((MovieBaseFragment)fragment).setResult(null);
+        if (fragment instanceof MovieBaseFragment) {
+            ((MovieBaseFragment) fragment).setResult(null);
+        }
 
         super.onBackPressed();
     }
 
     @Override
-    public void onBackStackChanged()
-    {
+    public void onBackStackChanged() {
         determineUpVisibility();
     }
 
     @Override
-    public boolean onSupportNavigateUp()
-    {
+    public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
 
-    private void determineUpVisibility()
-    {
+    private void determineUpVisibility() {
         boolean enabled = getSupportFragmentManager().getBackStackEntryCount() > 0;
         getSupportActionBar().setDisplayHomeAsUpEnabled(enabled);
     }

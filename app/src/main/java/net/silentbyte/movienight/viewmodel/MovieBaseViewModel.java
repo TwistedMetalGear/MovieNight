@@ -19,8 +19,8 @@ import io.reactivex.subjects.PublishSubject;
 /**
  * Base ViewModel for MovieListViewModel and MovieDetailViewModel. Implements common functionality.
  */
-public class MovieBaseViewModel extends AndroidViewModel
-{
+public class MovieBaseViewModel extends AndroidViewModel {
+
     public final ObservableBoolean error = new ObservableBoolean(false);
 
     private final SingleLiveData<List<Movie>> querySuggestions = new SingleLiveData<>();
@@ -32,55 +32,50 @@ public class MovieBaseViewModel extends AndroidViewModel
 
     private Disposable searchThrottlerDisposable;
 
-    public MovieBaseViewModel(Application application, MovieRepository repository)
-    {
+    public MovieBaseViewModel(Application application, MovieRepository repository) {
         super(application);
         this.repository = repository;
         subscribeToSearchThrottler();
     }
 
-    public void onQueryTextChange(String query)
-    {
+    public void onQueryTextChange(String query) {
         query = query.trim();
 
-        if (!query.isEmpty())
+        if (!query.isEmpty()) {
             searchThrottler.onNext(query);
+        }
     }
 
-    public SingleLiveData<List<Movie>> getQuerySuggestions()
-    {
+    public SingleLiveData<List<Movie>> getQuerySuggestions() {
         return querySuggestions;
     }
 
-    public void onRetryClick()
-    {
+    public void onRetryClick() {
         error.set(false);
         retryEvent.call();
     }
 
-    public SingleLiveData<Void> getRetryEvent()
-    {
+    public SingleLiveData<Void> getRetryEvent() {
         return retryEvent;
     }
 
     @Override
-    protected void onCleared()
-    {
+    protected void onCleared() {
         super.onCleared();
         searchThrottlerDisposable.dispose();
     }
 
-    private void subscribeToSearchThrottler()
-    {
+    private void subscribeToSearchThrottler() {
         // No need to handle error here. In the unlikely event of an error, the worst that
         // happens is that suggestions won't appear. An empty error handler is still attached
         // so that exceptions related to retrieving suggestions (e.g. an HTTP 429 response due
         // to excessive requests to TMDb) don't crash the app.
         searchThrottlerDisposable = searchThrottler
-            .debounce(400, TimeUnit.MILLISECONDS)
-            .observeOn(Schedulers.io())
-            .flatMapSingle(repository::searchBasic)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(querySuggestions::setValue, error -> {});
+                .debounce(400, TimeUnit.MILLISECONDS)
+                .observeOn(Schedulers.io())
+                .flatMapSingle(repository::searchBasic)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(querySuggestions::setValue, error -> {
+                });
     }
 }

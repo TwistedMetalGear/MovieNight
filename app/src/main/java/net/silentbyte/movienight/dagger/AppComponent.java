@@ -9,8 +9,9 @@ import dagger.Component;
 
 @Singleton
 @Component(modules = {AppModule.class, NetModule.class})
-public interface AppComponent
-{
+public interface AppComponent {
+
     void inject(MovieListFragment target);
+
     void inject(MovieDetailFragment target);
 }

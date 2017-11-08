@@ -4,10 +4,14 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="movie"
-                  type="net.silentbyte.movienight.model.Movie"/>
-        <variable name="clickCallback"
-                  type="net.silentbyte.movienight.ui.MovieClickCallback"/>
+
+        <variable
+            name="movie"
+            type="net.silentbyte.movienight.model.Movie"/>
+
+        <variable
+            name="clickCallback"
+            type="net.silentbyte.movienight.ui.MovieClickCallback"/>
     </data>
 
     <android.support.constraint.ConstraintLayout

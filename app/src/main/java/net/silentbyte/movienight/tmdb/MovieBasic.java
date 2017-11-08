@@ -8,8 +8,8 @@ import java.util.List;
  * Represents the basic set of information for a particular movie.
  * This models an individual search result from the response of a GET /search/movie request from TMDb.
  */
-public class MovieBasic
-{
+public class MovieBasic {
+
     @SerializedName("poster_path")
     private String posterPath;
     private boolean adult;
@@ -33,73 +33,59 @@ public class MovieBasic
     @SerializedName("vote_average")
     private float voteAverage;
 
-    public String getPosterPath()
-    {
+    public String getPosterPath() {
         return posterPath;
     }
 
-    public boolean isAdult()
-    {
+    public boolean isAdult() {
         return adult;
     }
 
-    public String getOverview()
-    {
+    public String getOverview() {
         return overview;
     }
 
-    public String getReleaseDate()
-    {
+    public String getReleaseDate() {
         return releaseDate;
     }
 
-    public List<Integer> getGenreIds()
-    {
+    public List<Integer> getGenreIds() {
         return genreIds;
     }
 
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public String getOriginalTitle()
-    {
+    public String getOriginalTitle() {
         return originalTitle;
     }
 
-    public String getOriginalLanguage()
-    {
+    public String getOriginalLanguage() {
         return originalLanguage;
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         return title;
     }
 
-    public String getBackdropPath()
-    {
+    public String getBackdropPath() {
         return backdropPath;
     }
 
-    public float getPopularity()
-    {
+    public float getPopularity() {
         return popularity;
     }
 
-    public int getVoteCount()
-    {
+    public int getVoteCount() {
         return voteCount;
     }
 
-    public boolean isVideo()
-    {
+    public boolean isVideo() {
         return video;
     }
 
-    public float getVoteAverage()
-    {
+    public float getVoteAverage() {
         return voteAverage;
     }
 }

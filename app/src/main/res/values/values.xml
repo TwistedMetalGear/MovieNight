@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="golden_stars">#FFC619</color>
-    <declare-styleable name="SimpleRatingBar"><attr format="color" name="srb_borderColor"/><attr format="color" name="srb_fillColor"/><attr format="color" name="srb_backgroundColor"/><attr format="color" name="srb_starBackgroundColor"/><attr format="color" name="srb_pressedBorderColor"/><attr format="color" name="srb_pressedFillColor"/><attr format="color" name="srb_pressedBackgroundColor"/><attr format="color" name="srb_pressedStarBackgroundColor"/><attr format="integer" name="srb_numberOfStars"/><attr format="dimension" name="srb_starSize"/><attr format="dimension" name="srb_maxStarSize"/><attr format="dimension" name="srb_starsSeparation"/><attr format="float" name="srb_starBorderWidth"/><attr format="float" name="srb_starCornerRadius"/><attr format="boolean" name="srb_isIndicator"/><attr format="float" name="srb_rating"/><attr format="float" name="srb_stepSize"/><attr format="boolean" name="srb_drawBorderEnabled"/><attr format="enum" name="srb_gravity">
-        <enum name="left" value="0"/>
-        <enum name="right" value="1"/>
-    </attr></declare-styleable>
+    <declare-styleable name="SimpleRatingBar">
+        <attr format="color" name="srb_borderColor"/>
+        <attr format="color" name="srb_fillColor"/>
+        <attr format="color" name="srb_backgroundColor"/>
+        <attr format="color" name="srb_starBackgroundColor"/>
+        <attr format="color" name="srb_pressedBorderColor"/>
+        <attr format="color" name="srb_pressedFillColor"/>
+        <attr format="color" name="srb_pressedBackgroundColor"/>
+        <attr format="color" name="srb_pressedStarBackgroundColor"/>
+        <attr format="integer" name="srb_numberOfStars"/>
+        <attr format="dimension" name="srb_starSize"/>
+        <attr format="dimension" name="srb_maxStarSize"/>
+        <attr format="dimension" name="srb_starsSeparation"/>
+        <attr format="float" name="srb_starBorderWidth"/>
+        <attr format="float" name="srb_starCornerRadius"/>
+        <attr format="boolean" name="srb_isIndicator"/>
+        <attr format="float" name="srb_rating"/>
+        <attr format="float" name="srb_stepSize"/>
+        <attr format="boolean" name="srb_drawBorderEnabled"/>
+        <attr format="enum" name="srb_gravity">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+    </declare-styleable>
 </resources>

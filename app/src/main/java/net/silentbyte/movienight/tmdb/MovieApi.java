@@ -8,8 +8,8 @@ import retrofit2.http.Query;
 /**
  * Retrofit API providing methods to search and retrieve movies from the TMDb API server.
  */
-public interface MovieApi
-{
+public interface MovieApi {
+
     String API_KEY = "INSERT_API_KEY_HERE";
     String BASE_URL = "https://api.themoviedb.org/3/";
     String BASE_POSTER_URL = "http://image.tmdb.org/t/p/w500";

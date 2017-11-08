@@ -3,6 +3,7 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="net.silentbyte.movienight.viewmodel.MovieListViewModel"/>
@@ -39,8 +40,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:gravity="center"
+                android:orientation="vertical"
                 app:visibility_boolean="@{viewModel.error}">
 
                 <TextView
@@ -52,10 +53,10 @@
                     android:id="@+id/retry_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewModel.onRetryClick()}"
                     android:padding="8dp"
                     android:text="@string/retry"
-                    android:textAllCaps="false"
-                    android:onClick="@{() -> viewModel.onRetryClick()}"/>
+                    android:textAllCaps="false"/>
 
             </LinearLayout>
 
@@ -68,8 +69,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text="@{viewModel.emptyListMessage}"/>
+                    android:text="@{viewModel.emptyListMessage}"
+                    android:textSize="20sp"/>
 
             </LinearLayout>
 
@@ -77,8 +78,8 @@
                 android:id="@+id/movie_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="8dp"
                 android:clipToPadding="false"
+                android:paddingBottom="8dp"
                 app:movies="@{viewModel.movies}"/>
 
         </LinearLayout>

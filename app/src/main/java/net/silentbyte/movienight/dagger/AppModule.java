@@ -12,34 +12,30 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class AppModule
-{
+public class AppModule {
+
     private final Application application;
 
-    public AppModule(Application application)
-    {
+    public AppModule(Application application) {
         this.application = application;
     }
 
     @Provides
     @Singleton
-    Application provideApplication()
-    {
+    Application provideApplication() {
         return application;
     }
 
     @Provides
     @Singleton
-    Context provideContext()
-    {
+    Context provideContext() {
         return application;
     }
 
     @Provides
     @Singleton
-    MovieDatabase provideMovieDatabase(Context context)
-    {
+    MovieDatabase provideMovieDatabase(Context context) {
         return Room.databaseBuilder(context.getApplicationContext(),
-            MovieDatabase.class, MovieDatabase.DATABASE_NAME).build();
+                MovieDatabase.class, MovieDatabase.DATABASE_NAME).build();
     }
 }

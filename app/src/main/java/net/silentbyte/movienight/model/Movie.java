@@ -13,245 +13,217 @@ import java.util.Objects;
  * Model object and database entity for a single movie.
  */
 @Entity(tableName = "movies")
-public class Movie
-{
+public class Movie {
+
     @PrimaryKey
     private int id = 0;
     private String title = "";
     private String overview = "";
-    @ColumnInfo(name="poster_path")
+    @ColumnInfo(name = "poster_path")
     private String posterPath = "";
-    @ColumnInfo(name="release_date")
+    @ColumnInfo(name = "release_date")
     private String releaseDate = "";
     private String certification = "?";
     private String genre = "?";
     private String language = "";
-    @ColumnInfo(name="user_review")
+    @ColumnInfo(name = "user_review")
     private String userReview = "";
     private int runtime = 0;
-    @ColumnInfo(name="user_rating")
+    @ColumnInfo(name = "user_rating")
     private float userRating = 0;
-    @ColumnInfo(name="community_rating")
+    @ColumnInfo(name = "community_rating")
     private float communityRating = 0;
-    @ColumnInfo(name="vote_count")
+    @ColumnInfo(name = "vote_count")
     private int voteCount = 0;
-    @ColumnInfo(name="update_time")
+    @ColumnInfo(name = "update_time")
     private long updateTime = 0;
 
-    public Movie() {}
-
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public void setId(int id)
-    {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title)
-    {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getOverview()
-    {
+    public String getOverview() {
         return overview;
     }
 
-    public void setOverview(String overview)
-    {
+    public void setOverview(String overview) {
         this.overview = overview;
     }
 
-    public String getPosterPath()
-    {
+    public String getPosterPath() {
         return posterPath;
     }
 
-    public String getPosterUrl()
-    {
+    public String getPosterUrl() {
         return posterPath == null ? null : MovieApi.BASE_POSTER_URL + posterPath;
     }
 
-    public void setPosterPath(String posterPath)
-    {
+    public void setPosterPath(String posterPath) {
         this.posterPath = posterPath;
     }
 
-    public String getReleaseDate()
-    {
+    public String getReleaseDate() {
         return releaseDate;
     }
 
-    public int getReleaseYear()
-    {
+    public int getReleaseYear() {
         // Careful! Some movies have an empty release date string.
-        if (releaseDate.isEmpty())
+        if (releaseDate.isEmpty()) {
             return 0;
-        else
+        }
+        else {
             return Integer.valueOf(releaseDate.substring(0, 4));
+        }
     }
 
-    public String getFormattedReleaseYear()
-    {
+    public String getFormattedReleaseYear() {
         int releaseYear = getReleaseYear();
 
-        if (releaseYear == 0)
+        if (releaseYear == 0) {
             return "(????)";
-        else
+        }
+        else {
             return "(" + releaseYear + ")";
+        }
     }
 
-    public void setReleaseDate(String releaseDate)
-    {
+    public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 
-    public String getCertification()
-    {
+    public String getCertification() {
         return certification;
     }
 
-    public void setCertification(String certification)
-    {
+    public void setCertification(String certification) {
         this.certification = certification;
     }
 
-    public String getGenre()
-    {
+    public String getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre)
-    {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 
-    public String getLanguage()
-    {
+    public String getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language)
-    {
+    public void setLanguage(String language) {
         this.language = language;
     }
 
-    public String getUserReview()
-    {
+    public String getUserReview() {
         return userReview;
     }
 
-    public void setUserReview(String userReview)
-    {
+    public void setUserReview(String userReview) {
         this.userReview = userReview;
     }
 
-    public int getRuntime()
-    {
+    public int getRuntime() {
         return runtime;
     }
 
-    public String getFormattedRuntime()
-    {
+    public String getFormattedRuntime() {
         int hours = 0;
         int minutes = 0;
         String formatted;
 
-        if (runtime > 60)
+        if (runtime > 60) {
             hours = runtime / 60;
+        }
 
         minutes = runtime % 60;
 
-        if (hours == 0)
+        if (hours == 0) {
             formatted = minutes + "min";
-        else if (minutes == 0)
+        }
+        else if (minutes == 0) {
             formatted = hours + "h";
-        else
+        }
+        else {
             formatted = hours + "h " + minutes + "min";
+        }
 
         return formatted;
     }
 
-    public void setRuntime(int runtime)
-    {
+    public void setRuntime(int runtime) {
         this.runtime = runtime;
     }
 
-    public float getUserRating()
-    {
+    public float getUserRating() {
         return userRating;
     }
 
-    public String getFormattedUserRating()
-    {
+    public String getFormattedUserRating() {
         DecimalFormat df = new DecimalFormat("0.0");
         String formatted = df.format(userRating);
 
-        if (userRating == 0)
+        if (userRating == 0) {
             formatted = "0";
-        else if (userRating == 10)
+        }
+        else if (userRating == 10) {
             formatted = "10";
+        }
 
         return formatted;
     }
 
-    public void setUserRating(float userRating)
-    {
+    public void setUserRating(float userRating) {
         this.userRating = userRating;
     }
 
-    public float getCommunityRating()
-    {
+    public float getCommunityRating() {
         return communityRating;
     }
 
-    public void setCommunityRating(float communityRating)
-    {
+    public void setCommunityRating(float communityRating) {
         this.communityRating = communityRating;
     }
 
-    public int getVoteCount()
-    {
+    public int getVoteCount() {
         return voteCount;
     }
 
-    public void setVoteCount(int voteCount)
-    {
+    public void setVoteCount(int voteCount) {
         this.voteCount = voteCount;
     }
 
-    public long getUpdateTime()
-    {
+    public long getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(long updateTime)
-    {
+    public void setUpdateTime(long updateTime) {
         this.updateTime = updateTime;
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
-        if (obj instanceof Movie)
-        {
-            return id == ((Movie)obj).id;
+    public boolean equals(Object obj) {
+        if (obj instanceof Movie) {
+            return id == ((Movie) obj).id;
         }
 
         return false;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return Objects.hash(id);
     }
 }

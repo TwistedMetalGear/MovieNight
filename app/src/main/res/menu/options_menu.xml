@@ -2,15 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/sort_item"
-          android:title="@string/sort"
-          android:icon="@drawable/ic_sort_white"
-          android:visible="false"
-          app:showAsAction="always"/>
+    <item
+        android:id="@+id/sort_item"
+        android:title="@string/sort"
+        android:icon="@drawable/ic_sort_white"
+        android:visible="false"
+        app:showAsAction="always"/>
 
-    <item android:id="@+id/search_item"
-          android:title="@string/search"
-          app:showAsAction="ifRoom"
-          app:actionViewClass="android.support.v7.widget.SearchView" />
+    <item
+        android:id="@+id/search_item"
+        android:title="@string/search"
+        app:showAsAction="ifRoom"
+        app:actionViewClass="android.support.v7.widget.SearchView"/>
 
 </menu>

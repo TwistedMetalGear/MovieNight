@@ -15,19 +15,17 @@ import java.util.List;
 /**
  * Adapter for the movie list RecyclerView.
  */
-public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>
-{
+public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieViewHolder> {
+
     private List<Movie> movies;
     private MovieClickCallback movieClickCallback;
 
-    public MovieListAdapter(MovieClickCallback clickCallback)
-    {
+    public MovieListAdapter(MovieClickCallback clickCallback) {
         movieClickCallback = clickCallback;
     }
 
     @Override
-    public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
-    {
+    public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         ListItemMovieBinding binding = DataBindingUtil.inflate(inflater, R.layout.list_item_movie, parent, false);
         binding.setClickCallback(movieClickCallback);
@@ -36,24 +34,21 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     }
 
     @Override
-    public void onBindViewHolder(MovieViewHolder holder, int position)
-    {
+    public void onBindViewHolder(MovieViewHolder holder, int position) {
         holder.binding.setMovie(movies.get(position));
         holder.binding.executePendingBindings();
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return movies == null ? 0 : movies.size();
     }
 
-    public void setMovies(List<Movie> movies)
-    {
-        if (this.movies == null)
+    public void setMovies(List<Movie> movies) {
+        if (this.movies == null) {
             this.movies = movies;
-        else
-        {
+        }
+        else {
             this.movies.clear();
             this.movies.addAll(movies);
         }
@@ -61,18 +56,15 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         notifyDataSetChanged();
     }
 
-    public static class MovieViewHolder extends RecyclerView.ViewHolder
-    {
+    public static class MovieViewHolder extends RecyclerView.ViewHolder {
         private ListItemMovieBinding binding;
 
-        public MovieViewHolder(ListItemMovieBinding binding)
-        {
+        public MovieViewHolder(ListItemMovieBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        public ListItemMovieBinding getBinding()
-        {
+        public ListItemMovieBinding getBinding() {
             return binding;
         }
     }

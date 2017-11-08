@@ -53,13 +53,16 @@ public class SimpleRatingBar extends View {
         Right(1);
 
         int id;
+
         Gravity(int id) {
             this.id = id;
         }
 
         static Gravity fromId(int id) {
             for (Gravity f : values()) {
-                if (f.id == id) return f;
+                if (f.id == id) {
+                    return f;
+                }
             }
             // default value
             Log.w("SimpleRatingBar", String.format("Gravity chosen is neither 'left' nor 'right', I will set it to Left"));
@@ -68,14 +71,22 @@ public class SimpleRatingBar extends View {
     }
 
     // Configurable variables
-    private @ColorInt int borderColor;
-    private @ColorInt int fillColor;
-    private @ColorInt int backgroundColor;
-    private @ColorInt int starBackgroundColor;
-    private @ColorInt int pressedBorderColor;
-    private @ColorInt int pressedFillColor;
-    private @ColorInt int pressedBackgroundColor;
-    private @ColorInt int pressedStarBackgroundColor;
+    private @ColorInt
+    int borderColor;
+    private @ColorInt
+    int fillColor;
+    private @ColorInt
+    int backgroundColor;
+    private @ColorInt
+    int starBackgroundColor;
+    private @ColorInt
+    int pressedBorderColor;
+    private @ColorInt
+    int pressedFillColor;
+    private @ColorInt
+    int pressedBackgroundColor;
+    private @ColorInt
+    int pressedStarBackgroundColor;
     private int numberOfStars;
     private float starsSeparation;
     private float desiredStarSize;
@@ -185,7 +196,7 @@ public class SimpleRatingBar extends View {
 
         numberOfStars = arr.getInteger(R.styleable.SimpleRatingBar_srb_numberOfStars, 5);
 
-        starsSeparation = arr.getDimensionPixelSize(R.styleable.SimpleRatingBar_srb_starsSeparation, (int)valueToPixels(4, Dimension.DP));
+        starsSeparation = arr.getDimensionPixelSize(R.styleable.SimpleRatingBar_srb_starsSeparation, (int) valueToPixels(4, Dimension.DP));
         maxStarSize = arr.getDimensionPixelSize(R.styleable.SimpleRatingBar_srb_maxStarSize, Integer.MAX_VALUE);
         desiredStarSize = arr.getDimensionPixelSize(R.styleable.SimpleRatingBar_srb_starSize, Integer.MAX_VALUE);
         stepSize = arr.getFloat(R.styleable.SimpleRatingBar_srb_stepSize, 0.1f);
@@ -241,32 +252,38 @@ public class SimpleRatingBar extends View {
         if (widthMode == MeasureSpec.EXACTLY) {
             //Must be this size
             width = widthSize;
-        } else if (widthMode == MeasureSpec.AT_MOST) {
+        }
+        else if (widthMode == MeasureSpec.AT_MOST) {
             //Can't be bigger than...
             if (desiredStarSize != Integer.MAX_VALUE) {
                 // user specified a specific star size, so there is a desired width
                 int desiredWidth = calculateTotalWidth(desiredStarSize, numberOfStars, starsSeparation, true);
                 width = Math.min(desiredWidth, widthSize);
-            } else if (maxStarSize != Integer.MAX_VALUE) {
+            }
+            else if (maxStarSize != Integer.MAX_VALUE) {
                 // user specified a max star size, so there is a desired width
                 int desiredWidth = calculateTotalWidth(maxStarSize, numberOfStars, starsSeparation, true);
                 width = Math.min(desiredWidth, widthSize);
-            } else {
+            }
+            else {
                 // using defaults
                 int desiredWidth = calculateTotalWidth(defaultStarSize, numberOfStars, starsSeparation, true);
                 width = Math.min(desiredWidth, widthSize);
             }
-        } else {
+        }
+        else {
             //Be whatever you want
             if (desiredStarSize != Integer.MAX_VALUE) {
                 // user specified a specific star size, so there is a desired width
                 int desiredWidth = calculateTotalWidth(desiredStarSize, numberOfStars, starsSeparation, true);
                 width = desiredWidth;
-            } else if (maxStarSize != Integer.MAX_VALUE) {
+            }
+            else if (maxStarSize != Integer.MAX_VALUE) {
                 // user specified a max star size, so there is a desired width
                 int desiredWidth = calculateTotalWidth(maxStarSize, numberOfStars, starsSeparation, true);
                 width = desiredWidth;
-            } else {
+            }
+            else {
                 // using defaults
                 int desiredWidth = calculateTotalWidth(defaultStarSize, numberOfStars, starsSeparation, true);
                 width = desiredWidth;
@@ -279,32 +296,38 @@ public class SimpleRatingBar extends View {
         if (heightMode == MeasureSpec.EXACTLY) {
             //Must be this size
             height = heightSize;
-        } else if (heightMode == MeasureSpec.AT_MOST) {
+        }
+        else if (heightMode == MeasureSpec.AT_MOST) {
             //Can't be bigger than...
             if (desiredStarSize != Integer.MAX_VALUE) {
                 // user specified a specific star size, so there is a desired width
                 int desiredHeight = calculateTotalHeight(desiredStarSize, numberOfStars, starsSeparation, true);
                 height = Math.min(desiredHeight, heightSize);
-            } else if (maxStarSize != Integer.MAX_VALUE) {
+            }
+            else if (maxStarSize != Integer.MAX_VALUE) {
                 // user specified a max star size, so there is a desired width
                 int desiredHeight = calculateTotalHeight(maxStarSize, numberOfStars, starsSeparation, true);
                 height = Math.min(desiredHeight, heightSize);
-            } else {
+            }
+            else {
                 // using defaults
                 int desiredHeight = calculateTotalHeight(tentativeStarSize, numberOfStars, starsSeparation, true);
                 height = Math.min(desiredHeight, heightSize);
             }
-        } else {
+        }
+        else {
             //Be whatever you want
             if (desiredStarSize != Integer.MAX_VALUE) {
                 // user specified a specific star size, so there is a desired width
                 int desiredHeight = calculateTotalHeight(desiredStarSize, numberOfStars, starsSeparation, true);
                 height = desiredHeight;
-            } else if (maxStarSize != Integer.MAX_VALUE) {
+            }
+            else if (maxStarSize != Integer.MAX_VALUE) {
                 // user specified a max star size, so there is a desired width
                 int desiredHeight = calculateTotalHeight(maxStarSize, numberOfStars, starsSeparation, true);
                 height = desiredHeight;
-            } else {
+            }
+            else {
                 // using defaults
                 int desiredHeight = calculateTotalHeight(tentativeStarSize, numberOfStars, starsSeparation, true);
                 height = desiredHeight;
@@ -315,14 +338,16 @@ public class SimpleRatingBar extends View {
         setMeasuredDimension(width, height);
     }
 
-    @Override protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
 
         int width = getWidth();
         int height = getHeight();
         if (desiredStarSize == Integer.MAX_VALUE) {
             currentStarSize = calculateBestStarSize(width, height);
-        } else {
+        }
+        else {
             currentStarSize = desiredStarSize;
         }
         performStarSizeAssociatedCalculations(width, height);
@@ -331,9 +356,10 @@ public class SimpleRatingBar extends View {
     /**
      * Calculates largest possible star size, based on chosen width and height.
      * If maxStarSize is present, it will be considered and star size will not be greater than this value.
+     *
      * @param width
      * @param height
-     * */
+     */
     private float calculateBestStarSize(int width, int height) {
         if (maxStarSize != Integer.MAX_VALUE) {
             float desiredTotalWidth = calculateTotalWidth(maxStarSize, numberOfStars, starsSeparation, true);
@@ -343,10 +369,12 @@ public class SimpleRatingBar extends View {
                 float sizeBasedOnWidth = (width - getPaddingLeft() - getPaddingRight() - starsSeparation * (numberOfStars - 1)) / numberOfStars;
                 float sizeBasedOnHeight = height - getPaddingTop() - getPaddingBottom();
                 return Math.min(sizeBasedOnWidth, sizeBasedOnHeight);
-            } else {
+            }
+            else {
                 return maxStarSize;
             }
-        } else {
+        }
+        else {
             // expand the most we can
             float sizeBasedOnWidth = (width - getPaddingLeft() - getPaddingRight() - starsSeparation * (numberOfStars - 1)) / numberOfStars;
             float sizeBasedOnHeight = height - getPaddingTop() - getPaddingBottom();
@@ -356,14 +384,15 @@ public class SimpleRatingBar extends View {
 
     /**
      * Performs auxiliary calculations to later speed up drawing phase.
+     *
      * @param width
      * @param height
      */
     private void performStarSizeAssociatedCalculations(int width, int height) {
         float totalStarsWidth = calculateTotalWidth(currentStarSize, numberOfStars, starsSeparation, false);
         float totalStarsHeight = calculateTotalHeight(currentStarSize, numberOfStars, starsSeparation, false);
-        float startingX = (width - getPaddingLeft() - getPaddingRight())/2 - totalStarsWidth/2 + getPaddingLeft();
-        float startingY = (height - getPaddingTop() - getPaddingBottom())/2 - totalStarsHeight/2 + getPaddingTop();
+        float startingX = (width - getPaddingLeft() - getPaddingRight()) / 2 - totalStarsWidth / 2 + getPaddingLeft();
+        float startingY = (height - getPaddingTop() - getPaddingBottom()) / 2 - totalStarsHeight / 2 + getPaddingTop();
         starsDrawingSpace = new RectF(startingX, startingY, startingX + totalStarsWidth, startingY + totalStarsHeight);
         float aux = starsDrawingSpace.width() * 0.05f;
         starsTouchSpace = new RectF(starsDrawingSpace.left - aux, starsDrawingSpace.top, starsDrawingSpace.right + aux, starsDrawingSpace.bottom);
@@ -378,7 +407,7 @@ public class SimpleRatingBar extends View {
         float innerBottomVerticalMargin = currentStarSize * 0.6f;
         float innerCenterVerticalMargin = currentStarSize * 0.27f;
 
-        starVertex = new float[] {
+        starVertex = new float[]{
                 tipHorizontalMargin, innerUpHorizontalMargin, // top left
                 tipHorizontalMargin + triangleSide, innerUpHorizontalMargin,
                 half, tipVerticalMargin, // top tip
@@ -394,6 +423,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Calculates total width to occupy based on several parameters
+     *
      * @param starSize
      * @param numberOfStars
      * @param starsSeparation
@@ -401,12 +431,13 @@ public class SimpleRatingBar extends View {
      * @return
      */
     private int calculateTotalWidth(float starSize, int numberOfStars, float starsSeparation, boolean padding) {
-        return Math.round(starSize * numberOfStars + starsSeparation * (numberOfStars -1))
-                +  (padding ? getPaddingLeft() + getPaddingRight() : 0);
+        return Math.round(starSize * numberOfStars + starsSeparation * (numberOfStars - 1))
+                + (padding ? getPaddingLeft() + getPaddingRight() : 0);
     }
 
     /**
      * Calculates total height to occupy based on several parameters
+     *
      * @param starSize
      * @param numberOfStars
      * @param starsSeparation
@@ -426,6 +457,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Generates internal canvas on which the ratingbar will be drawn.
+     *
      * @param w
      * @param h
      */
@@ -443,7 +475,8 @@ public class SimpleRatingBar extends View {
         }
     }
 
-    @Override protected void onDraw(Canvas canvas) {
+    @Override
+    protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         int height = getHeight();
@@ -463,14 +496,16 @@ public class SimpleRatingBar extends View {
         // draw stars
         if (gravity == Gravity.Left) {
             drawFromLeftToRight(internalCanvas);
-        } else {
+        }
+        else {
             drawFromRightToLeft(internalCanvas);
         }
 
         // draw view background color
         if (touchInProgress) {
             canvas.drawColor(pressedBackgroundColor);
-        } else {
+        }
+        else {
             canvas.drawColor(backgroundColor);
         }
 
@@ -487,27 +522,32 @@ public class SimpleRatingBar extends View {
             paintStarFill.setColor(pressedFillColor);
             if (pressedFillColor != Color.TRANSPARENT) {
                 paintStarFill.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
-            } else {
+            }
+            else {
                 paintStarFill.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
             }
             paintStarBackground.setColor(pressedStarBackgroundColor);
             if (pressedStarBackgroundColor != Color.TRANSPARENT) {
                 paintStarBackground.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
-            } else {
+            }
+            else {
                 paintStarBackground.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
             }
-        } else {
+        }
+        else {
             paintStarBorder.setColor(borderColor);
             paintStarFill.setColor(fillColor);
             if (fillColor != Color.TRANSPARENT) {
                 paintStarFill.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
-            } else {
+            }
+            else {
                 paintStarFill.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
             }
             paintStarBackground.setColor(starBackgroundColor);
             if (starBackgroundColor != Color.TRANSPARENT) {
                 paintStarBackground.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
-            } else {
+            }
+            else {
                 paintStarBackground.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
             }
         }
@@ -515,6 +555,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Draws the view when gravity is Left
+     *
      * @param internalCanvas
      */
     private void drawFromLeftToRight(Canvas internalCanvas) {
@@ -525,7 +566,8 @@ public class SimpleRatingBar extends View {
             if (remainingTotalRating >= 1) {
                 drawStar(internalCanvas, startingX, startingY, 1f, Gravity.Left);
                 remainingTotalRating -= 1;
-            } else {
+            }
+            else {
                 drawStar(internalCanvas, startingX, startingY, remainingTotalRating, Gravity.Left);
                 remainingTotalRating = 0;
             }
@@ -535,6 +577,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Draws the view when gravity is Right
+     *
      * @param internalCanvas
      */
     private void drawFromRightToLeft(Canvas internalCanvas) {
@@ -545,7 +588,8 @@ public class SimpleRatingBar extends View {
             if (remainingTotalRating >= 1) {
                 drawStar(internalCanvas, startingX, startingY, 1f, Gravity.Right);
                 remainingTotalRating -= 1;
-            } else {
+            }
+            else {
                 drawStar(internalCanvas, startingX, startingY, remainingTotalRating, Gravity.Right);
                 remainingTotalRating = 0;
             }
@@ -555,10 +599,11 @@ public class SimpleRatingBar extends View {
 
     /**
      * Draws a star in the provided canvas.
+     *
      * @param canvas
-     * @param x left of the star
-     * @param y top of the star
-     * @param filled between 0 and 1
+     * @param x       left of the star
+     * @param y       top of the star
+     * @param filled  between 0 and 1
      * @param gravity Left or Right
      */
     private void drawStar(Canvas canvas, float x, float y, float filled, Gravity gravity) {
@@ -568,8 +613,8 @@ public class SimpleRatingBar extends View {
         // prepare path for star
         starPath.reset();
         starPath.moveTo(x + starVertex[0], y + starVertex[1]);
-        for(int i = 2; i < starVertex.length; i=i+2) {
-            starPath.lineTo(x + starVertex[i], y + starVertex[i+1]);
+        for (int i = 2; i < starVertex.length; i = i + 2) {
+            starPath.lineTo(x + starVertex[i], y + starVertex[i + 1]);
         }
         starPath.close();
 
@@ -579,12 +624,13 @@ public class SimpleRatingBar extends View {
         // Note: below, currentStarSize*0.02f is a minor correction so the user won't see a vertical black line in between the fill and empty color
         if (gravity == Gravity.Left) {
             // color star fill
-            canvas.drawRect(x, y, x + fill + currentStarSize *0.02f, y + currentStarSize, paintStarFill);
+            canvas.drawRect(x, y, x + fill + currentStarSize * 0.02f, y + currentStarSize, paintStarFill);
             // draw star background
             canvas.drawRect(x + fill, y, x + currentStarSize, y + currentStarSize, paintStarBackground);
-        } else {
+        }
+        else {
             // color star fill
-            canvas.drawRect(x + currentStarSize - (fill+ currentStarSize *0.02f), y, x + currentStarSize, y + currentStarSize, paintStarFill);
+            canvas.drawRect(x + currentStarSize - (fill + currentStarSize * 0.02f), y, x + currentStarSize, y + currentStarSize, paintStarFill);
             // draw star background
             canvas.drawRect(x, y, x + currentStarSize - fill, y + currentStarSize, paintStarBackground);
         }
@@ -597,12 +643,12 @@ public class SimpleRatingBar extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (isIndicator  || (ratingAnimator != null && ratingAnimator.isRunning())) {
+        if (isIndicator || (ratingAnimator != null && ratingAnimator.isRunning())) {
             return false;
         }
 
         int action = event.getAction() & MotionEvent.ACTION_MASK;
-        switch(action) {
+        switch (action) {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_MOVE:
                 touchInProgress = true;
@@ -628,6 +674,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Assigns a rating to the touch event.
+     *
      * @param x
      * @param y
      */
@@ -641,22 +688,24 @@ public class SimpleRatingBar extends View {
         if (x < starsDrawingSpace.left) {
             rating = 0;
             return;
-        } else if (x >  starsDrawingSpace.right) {
+        }
+        else if (x > starsDrawingSpace.right) {
             rating = numberOfStars;
             return;
         }
 
         x = x - starsDrawingSpace.left;
         // reduce the width to allow the user reach the top and bottom values of rating (0 and numberOfStars)
-        rating = (float)numberOfStars / starsDrawingSpace.width() * x;
+        rating = (float) numberOfStars / starsDrawingSpace.width() * x;
 
         // correct rating in case step size is present
         float mod = rating % stepSize;
-        if (mod < stepSize/4) {
+        if (mod < stepSize / 4) {
             rating = rating - mod;
             rating = Math.max(0, rating);
-        } else {
-            rating =  rating - mod + stepSize;
+        }
+        else {
+            rating = rating - mod + stepSize;
             rating = Math.min(numberOfStars, rating);
         }
     }
@@ -713,7 +762,7 @@ public class SimpleRatingBar extends View {
 
   /* ----------- GETTERS AND SETTERS ----------- */
 
-    public float getRating(){
+    public float getRating() {
         return rating;
     }
 
@@ -721,6 +770,7 @@ public class SimpleRatingBar extends View {
      * Sets rating.
      * If provided value is less than 0, rating will be set to 0.
      * * If provided value is greater than numberOfStars, rating will be set to numberOfStars.
+     *
      * @param rating
      */
     public void setRating(float rating) {
@@ -739,6 +789,7 @@ public class SimpleRatingBar extends View {
     /**
      * Sets step size of rating.
      * Throws IllegalArgumentException if provided value is less or equal than zero.
+     *
      * @param stepSize
      */
     public void setStepSize(float stepSize) {
@@ -757,6 +808,7 @@ public class SimpleRatingBar extends View {
     /**
      * Sets indicator property.
      * If provided value is true, touch events will be deactivated, and thus user interaction will be deactivated.
+     *
      * @param indicator
      */
     public void setIndicator(boolean indicator) {
@@ -766,6 +818,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Returns max star size in pixels.
+     *
      * @return
      */
     public float getMaxStarSize() {
@@ -774,6 +827,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Returns max star size in the requested dimension.
+     *
      * @param dimen
      * @return
      */
@@ -784,6 +838,7 @@ public class SimpleRatingBar extends View {
     /**
      * Sets maximum star size in pixels.
      * If current star size is less than provided value, this has no effect on the view.
+     *
      * @param maxStarSize
      */
     public void setMaxStarSize(float maxStarSize) {
@@ -800,6 +855,7 @@ public class SimpleRatingBar extends View {
     /**
      * Sets maximum star size using the given dimension.
      * If current star size is less than provided value, this has no effect on the view.
+     *
      * @param maxStarSize
      */
     public void setMaxStarSize(float maxStarSize, @Dimension int dimen) {
@@ -808,6 +864,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Return star size in pixels.
+     *
      * @return
      */
     public float getStarSize() {
@@ -816,6 +873,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Return star size in the requested dimension.
+     *
      * @param dimen
      * @return
      */
@@ -825,6 +883,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Sets exact star size in pixels.
+     *
      * @param starSize
      */
     public void setStarSize(float starSize) {
@@ -841,6 +900,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Sets exact star size using the given dimension.
+     *
      * @param starSize
      * @param dimen
      */
@@ -850,6 +910,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Returns stars separation in pixels.
+     *
      * @return
      */
     public float getStarsSeparation() {
@@ -858,6 +919,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Returns stars separation in the requested dimension.
+     *
      * @param dimen
      * @return
      */
@@ -867,6 +929,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Sets separation between stars in pixels.
+     *
      * @param starsSeparation
      */
     public void setStarsSeparation(float starsSeparation) {
@@ -880,6 +943,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Sets separation between stars using the given dimension.
+     *
      * @param starsSeparation
      */
     public void setStarsSeparation(float starsSeparation, @Dimension int dimen) {
@@ -894,6 +958,7 @@ public class SimpleRatingBar extends View {
      * Sets number of stars.
      * It also sets the rating to zero.
      * Throws IllegalArgumentException if provided value is less or equal than zero.
+     *
      * @param numberOfStars
      */
     public void setNumberOfStars(int numberOfStars) {
@@ -911,6 +976,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Returns star border width in pixels.
+     *
      * @return
      */
     public float getStarBorderWidth() {
@@ -919,6 +985,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Returns star border width in the requested dimension.
+     *
      * @param dimen
      * @return
      */
@@ -929,6 +996,7 @@ public class SimpleRatingBar extends View {
     /**
      * Sets border width of stars in pixels.
      * Throws IllegalArgumentException if provided value is less or equal than zero.
+     *
      * @param starBorderWidth
      */
     public void setStarBorderWidth(float starBorderWidth) {
@@ -945,6 +1013,7 @@ public class SimpleRatingBar extends View {
     /**
      * Sets border width of stars using the given dimension.
      * Throws IllegalArgumentException if provided value is less or equal than zero.
+     *
      * @param starBorderWidth
      * @param dimen
      */
@@ -954,6 +1023,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Returns start corner radius in pixels,
+     *
      * @return
      */
     public float getStarCornerRadius() {
@@ -962,6 +1032,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Returns start corner radius in the requested dimension,
+     *
      * @param dimen
      * @return
      */
@@ -972,6 +1043,7 @@ public class SimpleRatingBar extends View {
     /**
      * Sets radius of star corner in pixels.
      * Throws IllegalArgumentException if provided value is less than zero.
+     *
      * @param starCornerRadius
      */
     public void setStarCornerRadius(float starCornerRadius) {
@@ -990,6 +1062,7 @@ public class SimpleRatingBar extends View {
     /**
      * Sets radius of star corner using the given dimension.
      * Throws IllegalArgumentException if provided value is less than zero.
+     *
      * @param starCornerRadius
      * @param dimen
      */
@@ -997,12 +1070,14 @@ public class SimpleRatingBar extends View {
         setStarCornerRadius(valueToPixels(starCornerRadius, dimen));
     }
 
-    public @ColorInt int getBorderColor() {
+    public @ColorInt
+    int getBorderColor() {
         return borderColor;
     }
 
     /**
      * Sets border color of stars in normal state.
+     *
      * @param borderColor
      */
     public void setBorderColor(@ColorInt int borderColor) {
@@ -1011,12 +1086,14 @@ public class SimpleRatingBar extends View {
         invalidate();
     }
 
-    public @ColorInt int getFillColor() {
+    public @ColorInt
+    int getFillColor() {
         return fillColor;
     }
 
     /**
      * Sets fill color of stars in normal state.
+     *
      * @param fillColor
      */
     public void setFillColor(@ColorInt int fillColor) {
@@ -1025,12 +1102,14 @@ public class SimpleRatingBar extends View {
         invalidate();
     }
 
-    public @ColorInt int getStarBackgroundColor() {
+    public @ColorInt
+    int getStarBackgroundColor() {
         return starBackgroundColor;
     }
 
     /**
      * Sets background color of stars in normal state.
+     *
      * @param starBackgroundColor
      */
     public void setStarBackgroundColor(@ColorInt int starBackgroundColor) {
@@ -1039,12 +1118,14 @@ public class SimpleRatingBar extends View {
         invalidate();
     }
 
-    public @ColorInt int getPressedBorderColor() {
+    public @ColorInt
+    int getPressedBorderColor() {
         return pressedBorderColor;
     }
 
     /**
      * Sets border color of stars in pressed state.
+     *
      * @param pressedBorderColor
      */
     public void setPressedBorderColor(@ColorInt int pressedBorderColor) {
@@ -1053,12 +1134,14 @@ public class SimpleRatingBar extends View {
         invalidate();
     }
 
-    public @ColorInt int getPressedFillColor() {
+    public @ColorInt
+    int getPressedFillColor() {
         return pressedFillColor;
     }
 
     /**
      * Sets fill color of stars in pressed state.
+     *
      * @param pressedFillColor
      */
     public void setPressedFillColor(@ColorInt int pressedFillColor) {
@@ -1067,12 +1150,14 @@ public class SimpleRatingBar extends View {
         invalidate();
     }
 
-    public @ColorInt int getPressedStarBackgroundColor() {
+    public @ColorInt
+    int getPressedStarBackgroundColor() {
         return pressedStarBackgroundColor;
     }
 
     /**
      * Sets background color of stars in pressed state.
+     *
      * @param pressedStarBackgroundColor
      */
     public void setPressedStarBackgroundColor(@ColorInt int pressedStarBackgroundColor) {
@@ -1087,6 +1172,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Sets gravity of fill.
+     *
      * @param gravity
      */
     public void setGravity(Gravity gravity) {
@@ -1102,6 +1188,7 @@ public class SimpleRatingBar extends View {
     /**
      * Sets drawBorder property.
      * If provided value is true, border will be drawn, otherwise it will be omithed.
+     *
      * @param drawBorderEnabled
      */
     public void setDrawBorderEnabled(boolean drawBorderEnabled) {
@@ -1112,6 +1199,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Convenience method to convert a value in the given dimension to pixels.
+     *
      * @param value
      * @param dimen
      * @return
@@ -1129,6 +1217,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Convenience method to convert a value from pixels to the given dimension.
+     *
      * @param value
      * @param dimen
      * @return
@@ -1146,6 +1235,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Sets rating with animation.
+     *
      * @param builder
      */
     private void animateRating(AnimationBuilder builder) {
@@ -1202,6 +1292,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Returns a new AnimationBuilder.
+     *
      * @return
      */
     public AnimationBuilder getAnimationBuilder() {
@@ -1210,6 +1301,7 @@ public class SimpleRatingBar extends View {
 
     /**
      * Normalizes rating passed by argument between 0 and numberOfStars.
+     *
      * @param rating
      * @return
      */
@@ -1217,24 +1309,29 @@ public class SimpleRatingBar extends View {
         if (rating < 0) {
             Log.w("SimpleRatingBar", String.format("Assigned rating is less than 0 (%f < 0), I will set it to exactly 0", rating));
             return 0;
-        } else if (rating > numberOfStars) {
+        }
+        else if (rating > numberOfStars) {
             Log.w("SimpleRatingBar", String.format("Assigned rating is greater than numberOfStars (%f > %d), I will set it to exactly numberOfStars", rating, numberOfStars));
             return numberOfStars;
-        } else {
+        }
+        else {
             return rating;
         }
     }
 
     /**
      * Sets OnClickListener.
+     *
      * @param listener
      */
-    @Override public void setOnClickListener(OnClickListener listener) {
+    @Override
+    public void setOnClickListener(OnClickListener listener) {
         this.clickListener = listener;
     }
 
     /**
      * Sets OnRatingBarChangeListener.
+     *
      * @param listener
      */
     public void setOnRatingBarChangeListener(OnRatingBarChangeListener listener) {
@@ -1251,10 +1348,10 @@ public class SimpleRatingBar extends View {
          * lifting the touch.
          *
          * @param simpleRatingBar The RatingBar whose rating has changed.
-         * @param rating The current rating. This will be in the range
-         *            0..numStars.
-         * @param fromUser True if the rating change was initiated by a user's
-         *            touch gesture or arrow key/horizontal trackbell movement.
+         * @param rating          The current rating. This will be in the range
+         *                        0..numStars.
+         * @param fromUser        True if the rating change was initiated by a user's
+         *                        touch gesture or arrow key/horizontal trackbell movement.
          */
         void onRatingChanged(SimpleRatingBar simpleRatingBar, float rating, boolean fromUser);
 
@@ -1287,6 +1384,7 @@ public class SimpleRatingBar extends View {
 
         /**
          * Sets duration of animation.
+         *
          * @param duration
          * @return
          */
@@ -1297,6 +1395,7 @@ public class SimpleRatingBar extends View {
 
         /**
          * Sets interpolator for animation.
+         *
          * @param interpolator
          * @return
          */
@@ -1307,6 +1406,7 @@ public class SimpleRatingBar extends View {
 
         /**
          * Sets rating after animation has ended.
+         *
          * @param ratingTarget
          * @return
          */
@@ -1317,6 +1417,7 @@ public class SimpleRatingBar extends View {
 
         /**
          * Sets repeat count for animation.
+         *
          * @param repeatCount must be a positive value or ValueAnimator.INFINITE
          * @return
          */
@@ -1327,6 +1428,7 @@ public class SimpleRatingBar extends View {
 
         /**
          * Sets repeat mode for animation.
+         *
          * @param repeatMode must be ValueAnimator.RESTART or ValueAnimator.REVERSE
          * @return
          */
@@ -1337,6 +1439,7 @@ public class SimpleRatingBar extends View {
 
         /**
          * Sets AnimatorListener.
+         *
          * @param animatorListener
          * @return
          */

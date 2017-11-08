@@ -8,30 +8,28 @@ import java.util.List;
  * Represents the set of results corresponding to a search for a particular movie.
  * This models the response of a GET /search/movie request from TMDb.
  */
-public class MovieSearchResponse
-{
+public class MovieSearchResponse {
+
     private int page;
     List<MovieBasic> results;
-    @SerializedName("total_results") private int totalResults;
-    @SerializedName("total_pages") private int totalPages;
+    @SerializedName("total_results")
+    private int totalResults;
+    @SerializedName("total_pages")
+    private int totalPages;
 
-    public int getPage()
-    {
+    public int getPage() {
         return page;
     }
 
-    public List<MovieBasic> getResults()
-    {
+    public List<MovieBasic> getResults() {
         return results;
     }
 
-    public int getTotalResults()
-    {
+    public int getTotalResults() {
         return totalResults;
     }
 
-    public int getTotalPages()
-    {
+    public int getTotalPages() {
         return totalPages;
     }
 }

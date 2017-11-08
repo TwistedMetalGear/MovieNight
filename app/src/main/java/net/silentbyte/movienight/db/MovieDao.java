@@ -12,8 +12,8 @@ import java.util.List;
 import io.reactivex.Single;
 
 @Dao
-public interface MovieDao
-{
+public interface MovieDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertMovie(Movie movie);
 

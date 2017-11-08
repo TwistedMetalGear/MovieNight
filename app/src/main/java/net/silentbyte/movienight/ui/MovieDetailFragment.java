@@ -29,8 +29,8 @@ import javax.inject.Inject;
  * the updated movies list in onResume to determine if they have to invalidate their cache and reload
  * the movie(s) or not.
  */
-public class MovieDetailFragment extends MovieBaseFragment
-{
+public class MovieDetailFragment extends MovieBaseFragment {
+
     public static final String KEY_USER_RATING = "user_rating";
     public static final String KEY_USER_REVIEW = "user_review";
     public static final String KEY_MODIFIED = "modified";
@@ -42,8 +42,7 @@ public class MovieDetailFragment extends MovieBaseFragment
     @Inject
     MovieDetailViewModel.Factory factory;
 
-    public static MovieDetailFragment newInstance(int movieId)
-    {
+    public static MovieDetailFragment newInstance(int movieId) {
         Bundle args = new Bundle();
         args.putInt(ARG_MOVIE_ID, movieId);
         MovieDetailFragment fragment = new MovieDetailFragment();
@@ -52,13 +51,12 @@ public class MovieDetailFragment extends MovieBaseFragment
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         AppComponent component = DaggerAppComponent.builder()
-            .appModule(new AppModule(getActivity().getApplication()))
-            .build();
+                .appModule(new AppModule(getActivity().getApplication()))
+                .build();
 
         component.inject(this);
 
@@ -66,17 +64,15 @@ public class MovieDetailFragment extends MovieBaseFragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_detail, container, false);
-        binding.setViewModel((MovieDetailViewModel)viewModel);
+        binding.setViewModel((MovieDetailViewModel) viewModel);
 
         binding.ratingBar.setOnTouchListener((view, motionEvent) ->
         {
             binding.getViewModel().onUserRatingChanged(binding.ratingBar.getRating());
 
-            if (motionEvent.getAction() == MotionEvent.ACTION_UP)
-            {
+            if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                 view.performClick();
                 return true;
             }
@@ -86,33 +82,31 @@ public class MovieDetailFragment extends MovieBaseFragment
 
         binding.ratingStar.setOnTouchListener((view, motionEvent) -> true); // Disables touch events on the rating star.
 
-        binding.userReview.addTextChangedListener(new TextWatcher()
-        {
+        binding.userReview.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 binding.getViewModel().onUserReviewChanged(s.toString());
             }
 
             @Override
-            public void afterTextChanged(Editable s){}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         return binding.getRoot();
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState)
-    {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         subscribeToViewModel();
 
-        if (savedInstanceState != null)
-        {
+        if (savedInstanceState != null) {
             float userRating = savedInstanceState.getFloat(KEY_USER_RATING);
             String userReview = savedInstanceState.getString(KEY_USER_REVIEW);
             boolean modified = savedInstanceState.getBoolean(KEY_MODIFIED);
@@ -124,14 +118,12 @@ public class MovieDetailFragment extends MovieBaseFragment
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
 
         // If one or more movies have been updated, invalidate the cache as necessary.
         // This ensures that the latest movie data is loaded and displayed.
-        if (!invalidated && !updatedMovieIds.isEmpty())
-        {
+        if (!invalidated && !updatedMovieIds.isEmpty()) {
             binding.getViewModel().invalidateCache(updatedMovieIds);
             invalidated = true;
         }
@@ -140,8 +132,7 @@ public class MovieDetailFragment extends MovieBaseFragment
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState)
-    {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
         // Because of the use of target fragments, it's possible for this method to be called
@@ -151,14 +142,13 @@ public class MovieDetailFragment extends MovieBaseFragment
         // but not onCreateView, onActivityCreated, etc... Since the binding reference will be
         // null in this case, we will retrieve the viewModel reference not through the binding,
         // but through the base class reference.
-        outState.putFloat(KEY_USER_RATING, ((MovieDetailViewModel)viewModel).userRating.get());
-        outState.putString(KEY_USER_REVIEW, ((MovieDetailViewModel)viewModel).userReview.get());
-        outState.putBoolean(KEY_MODIFIED, ((MovieDetailViewModel)viewModel).modified.get());
+        outState.putFloat(KEY_USER_RATING, ((MovieDetailViewModel) viewModel).userRating.get());
+        outState.putString(KEY_USER_REVIEW, ((MovieDetailViewModel) viewModel).userReview.get());
+        outState.putBoolean(KEY_MODIFIED, ((MovieDetailViewModel) viewModel).modified.get());
     }
 
     @Override
-    protected void subscribeToViewModel()
-    {
+    protected void subscribeToViewModel() {
         super.subscribeToViewModel();
 
         // Called in response to a movie being saved.
@@ -178,11 +168,10 @@ public class MovieDetailFragment extends MovieBaseFragment
 
         // Called when there is an error saving a movie.
         binding.getViewModel().getSaveMovieErrorEvent().observe(this, aVoid ->
-            Toast.makeText(getActivity(), R.string.save_movie_error, Toast.LENGTH_SHORT).show());
+                Toast.makeText(getActivity(), R.string.save_movie_error, Toast.LENGTH_SHORT).show());
     }
 
-    private void loadMovie()
-    {
+    private void loadMovie() {
         binding.getViewModel().getMovieById(getArguments().getInt(ARG_MOVIE_ID));
     }
 }

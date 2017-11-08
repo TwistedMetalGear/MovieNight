@@ -36,8 +36,8 @@ import javax.inject.Inject;
  * saved movies are loaded. When the query argument is non-null, the value of the argument is used
  * to execute a search.
  */
-public class MovieListFragment extends MovieBaseFragment
-{
+public class MovieListFragment extends MovieBaseFragment {
+
     private static final String ARG_QUERY = "query";
     private static final String KEY_FIRST_LAUNCH = "first_launch";
     private static final String KEY_SORT_METHOD = "sort_method";
@@ -50,8 +50,7 @@ public class MovieListFragment extends MovieBaseFragment
     @Inject
     MovieListViewModel.Factory factory;
 
-    public static MovieListFragment newInstance(String query)
-    {
+    public static MovieListFragment newInstance(String query) {
         Bundle args = new Bundle();
         args.putString(ARG_QUERY, query);
         MovieListFragment fragment = new MovieListFragment();
@@ -60,43 +59,38 @@ public class MovieListFragment extends MovieBaseFragment
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         AppComponent component = DaggerAppComponent.builder()
-            .appModule(new AppModule(getActivity().getApplication()))
-            .build();
+                .appModule(new AppModule(getActivity().getApplication()))
+                .build();
 
         component.inject(this);
 
         viewModel = ViewModelProviders.of(this, factory).get(MovieListViewModel.class);
 
-        if (savedInstanceState != null)
-        {
+        if (savedInstanceState != null) {
             firstLaunch = savedInstanceState.getBoolean(KEY_FIRST_LAUNCH);
-            sortMethod = (SortMethod)savedInstanceState.getSerializable(KEY_SORT_METHOD);
+            sortMethod = (SortMethod) savedInstanceState.getSerializable(KEY_SORT_METHOD);
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_list, container, false);
-        binding.setViewModel((MovieListViewModel)viewModel);
+        binding.setViewModel((MovieListViewModel) viewModel);
 
         binding.movieRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.movieRecycler.setAdapter(new MovieListAdapter(movieClickCallback));
 
-        if (getArguments().getString(ARG_QUERY) == null)
-        {
+        if (getArguments().getString(ARG_QUERY) == null) {
             // Allow swipe to delete when displaying saved movies.
             MovieTouchCallback callback = new MovieTouchCallback();
             ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
             touchHelper.attachToRecyclerView(binding.movieRecycler);
         }
-        else
-        {
+        else {
             // Hide add movie button when showing search results.
             binding.addMovieButton.setVisibility(View.GONE);
         }
@@ -105,18 +99,17 @@ public class MovieListFragment extends MovieBaseFragment
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState)
-    {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (firstLaunch)
-        {
+        if (firstLaunch) {
             // Default to sorting by last modified date when displaying saved movies. Note that we
             // don't set the default sort method when displaying search results. This is because the
             // ViewModel defaults to a sort method of NONE which is what we want for search results.
             // Making the assumption that TMDb is sorting search results by relevance.
-            if (getArguments().getString(ARG_QUERY) == null)
+            if (getArguments().getString(ARG_QUERY) == null) {
                 sortMethod = SortMethod.MODIFIED_DATE;
+            }
         }
 
         binding.getViewModel().setSortMethod(sortMethod);
@@ -127,8 +120,7 @@ public class MovieListFragment extends MovieBaseFragment
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
-    {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
         searchView.setOnSearchClickListener(v -> binding.addMovieButton.setVisibility(View.GONE));
@@ -136,8 +128,9 @@ public class MovieListFragment extends MovieBaseFragment
         searchView.setOnCloseListener(() ->
         {
             // Add movie button should only be visible if this fragment is showing saved movies.
-            if (getArguments().getString(ARG_QUERY) == null)
+            if (getArguments().getString(ARG_QUERY) == null) {
                 binding.addMovieButton.setVisibility(View.VISIBLE);
+            }
 
             return false;
         });
@@ -147,10 +140,8 @@ public class MovieListFragment extends MovieBaseFragment
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.sort_item:
                 showSortPopup();
             default:
@@ -159,22 +150,18 @@ public class MovieListFragment extends MovieBaseFragment
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
 
         // If one or more movies have been updated, invalidate the cache as necessary.
         // This ensures that the latest movie data is loaded and displayed.
-        if (!invalidated && !updatedMovieIds.isEmpty())
-        {
-            if (getArguments().getString(ARG_QUERY) == null)
-            {
+        if (!invalidated && !updatedMovieIds.isEmpty()) {
+            if (getArguments().getString(ARG_QUERY) == null) {
                 // Always invalidate when we are displaying saved movies because either a new movie was
                 // added or an existing movie was updated, both of which should be reflected in the list.
                 binding.getViewModel().invalidateCache();
             }
-            else
-            {
+            else {
                 // In this case we are displaying search results. We only need to invalidate if the search
                 // results contain any of the movies that were updated.
                 binding.getViewModel().invalidateCache(updatedMovieIds);
@@ -186,24 +173,23 @@ public class MovieListFragment extends MovieBaseFragment
             // cache as necessary and we don't need to pass back updatedMovieIds any further since there
             // are no more fragments on the back stack. It doesn't necessarily have to be cleared, but it
             // will keep growing in size if it isn't.
-            if (getFragmentManager().getBackStackEntryCount() == 0)
+            if (getFragmentManager().getBackStackEntryCount() == 0) {
                 updatedMovieIds.clear();
+            }
         }
 
         loadMovies();
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState)
-    {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(KEY_FIRST_LAUNCH, firstLaunch);
         outState.putSerializable(KEY_SORT_METHOD, sortMethod);
     }
 
     @Override
-    protected void subscribeToViewModel()
-    {
+    protected void subscribeToViewModel() {
         super.subscribeToViewModel();
 
         // Called when the user taps the add movie button.
@@ -226,11 +212,11 @@ public class MovieListFragment extends MovieBaseFragment
 
         // Called when there is an error deleting a movie.
         binding.getViewModel().getDeleteMovieErrorEvent().observe(this, aVoid ->
-            Toast.makeText(getActivity(), R.string.delete_movie_error, Toast.LENGTH_SHORT).show());
+                Toast.makeText(getActivity(), R.string.delete_movie_error, Toast.LENGTH_SHORT).show());
 
         // Called in response to the user undoing a movie delete.
         binding.getViewModel().getUndoDeleteEvent().observe(this, aVoid ->
-            Snackbar.make(getView(), R.string.movie_restored, Snackbar.LENGTH_SHORT).show());
+                Snackbar.make(getView(), R.string.movie_restored, Snackbar.LENGTH_SHORT).show());
 
         // Called when there is an error undoing a movie delete.
         binding.getViewModel().getUndoDeleteErrorEvent().observe(this, aVoid ->
@@ -240,25 +226,24 @@ public class MovieListFragment extends MovieBaseFragment
         });
     }
 
-    private void loadMovies()
-    {
+    private void loadMovies() {
         String query = getArguments().getString(ARG_QUERY);
 
-        if (query == null)
+        if (query == null) {
             binding.getViewModel().getSavedMovies();
-        else
+        }
+        else {
             binding.getViewModel().search(query);
+        }
     }
 
-    private void showSortPopup()
-    {
+    private void showSortPopup() {
         PopupMenu popup = new PopupMenu(getContext(), getActivity().findViewById(R.id.sort_item));
         popup.getMenuInflater().inflate(R.menu.sort_menu, popup.getMenu());
 
         popup.setOnMenuItemClickListener(menuItem ->
         {
-            switch (menuItem.getItemId())
-            {
+            switch (menuItem.getItemId()) {
                 case R.id.title:
                     sortMethod = SortMethod.TITLE;
                     break;
@@ -281,25 +266,21 @@ public class MovieListFragment extends MovieBaseFragment
         popup.show();
     }
 
-    private class  MovieTouchCallback extends ItemTouchHelper.Callback
-    {
+    private class MovieTouchCallback extends ItemTouchHelper.Callback {
         @Override
-        public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder)
-        {
+        public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
             int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
             return makeMovementFlags(0, swipeFlags);
         }
 
         @Override
-        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target)
-        {
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
             return false;
         }
 
         @Override
-        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction)
-        {
-            Movie movie = ((MovieListAdapter.MovieViewHolder)viewHolder).getBinding().getMovie();
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            Movie movie = ((MovieListAdapter.MovieViewHolder) viewHolder).getBinding().getMovie();
             binding.getViewModel().deleteMovie(movie);
         }
     }

@@ -13,26 +13,23 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
-public class NetModule
-{
+public class NetModule {
+
     @Provides
     @Singleton
-    Converter.Factory provideGsonConverterFactory()
-    {
+    Converter.Factory provideGsonConverterFactory() {
         return GsonConverterFactory.create();
     }
 
     @Provides
     @Singleton
-    CallAdapter.Factory provideRxJava2CallAdapterFactory()
-    {
+    CallAdapter.Factory provideRxJava2CallAdapterFactory() {
         return RxJava2CallAdapterFactory.create();
     }
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit(Converter.Factory converterFactory, CallAdapter.Factory callAdapterFactory)
-    {
+    Retrofit provideRetrofit(Converter.Factory converterFactory, CallAdapter.Factory callAdapterFactory) {
         return new Retrofit.Builder()
                 .baseUrl(MovieApi.BASE_URL)
                 .addConverterFactory(converterFactory)
@@ -42,8 +39,7 @@ public class NetModule
 
     @Provides
     @Singleton
-    MovieApi provideMovieApi(Retrofit retrofit)
-    {
+    MovieApi provideMovieApi(Retrofit retrofit) {
         return retrofit.create(MovieApi.class);
     }
 }

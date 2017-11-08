@@ -9,8 +9,8 @@ import java.util.List;
  * Represents the detailed set of information for a particular movie.
  * This models the response of a GET /movie/{movie_id} request from TMDb.
  */
-public class MovieDetailed extends MovieBasic
-{
+public class MovieDetailed extends MovieBasic {
+
     @SerializedName("belongs_to_collection")
     private MovieCollection belongsToCollection;
     private int budget;
@@ -31,68 +31,55 @@ public class MovieDetailed extends MovieBasic
     @SerializedName("release_dates")
     private ReleaseDates releaseDates;
 
-    public MovieCollection getBelongsToCollection()
-    {
+    public MovieCollection getBelongsToCollection() {
         return belongsToCollection;
     }
 
-    public int getBudget()
-    {
+    public int getBudget() {
         return budget;
     }
 
-    public List<IdName> getGenres()
-    {
+    public List<IdName> getGenres() {
         return genres;
     }
 
-    public String getHomepage()
-    {
+    public String getHomepage() {
         return homepage;
     }
 
-    public String getImdbId()
-    {
+    public String getImdbId() {
         return imdbId;
     }
 
-    public List<IdName> getProductionCompanies()
-    {
+    public List<IdName> getProductionCompanies() {
         return productionCompanies;
     }
 
-    public List<ProductionCountry> getProductionCountries()
-    {
+    public List<ProductionCountry> getProductionCountries() {
         return productionCountries;
     }
 
-    public int getRevenue()
-    {
+    public int getRevenue() {
         return revenue;
     }
 
-    public int getRuntime()
-    {
+    public int getRuntime() {
         return runtime;
     }
 
-    public List<SpokenLanguage> getSpokenLanguages()
-    {
+    public List<SpokenLanguage> getSpokenLanguages() {
         return spokenLanguages;
     }
 
-    public String getStatus()
-    {
+    public String getStatus() {
         return status;
     }
 
-    public String getTagline()
-    {
+    public String getTagline() {
         return tagline;
     }
 
-    public ReleaseDates getReleaseDates()
-    {
+    public ReleaseDates getReleaseDates() {
         return releaseDates;
     }
 
@@ -101,12 +88,10 @@ public class MovieDetailed extends MovieBasic
      * We will instead extract the genre ids from the list of genres and return a new list.
      */
     @Override
-    public List<Integer> getGenreIds()
-    {
+    public List<Integer> getGenreIds() {
         List<Integer> genreIds = new ArrayList<>();
 
-        for (IdName idName : genres)
-        {
+        for (IdName idName : genres) {
             genreIds.add(idName.id);
         }
 
@@ -116,8 +101,7 @@ public class MovieDetailed extends MovieBasic
     /**
      * Represents the collection that a movie belongs to.
      */
-    public class MovieCollection
-    {
+    public class MovieCollection {
         private int id;
         private String name;
         @SerializedName("poster_path")
@@ -125,23 +109,19 @@ public class MovieDetailed extends MovieBasic
         @SerializedName("backdrop_path")
         private String backdropPath;
 
-        public int getId()
-        {
+        public int getId() {
             return id;
         }
 
-        public String getName()
-        {
+        public String getName() {
             return name;
         }
 
-        public String getPosterPath()
-        {
+        public String getPosterPath() {
             return posterPath;
         }
 
-        public String getBackdropPath()
-        {
+        public String getBackdropPath() {
             return backdropPath;
         }
     }
@@ -150,18 +130,15 @@ public class MovieDetailed extends MovieBasic
      * Generic ID/Name pair.
      * Used to represent both genre and production company.
      */
-    public class IdName
-    {
+    public class IdName {
         private int id;
         private String name;
 
-        public int getId()
-        {
+        public int getId() {
             return id;
         }
 
-        public String getName()
-        {
+        public String getName() {
             return name;
         }
     }
@@ -169,19 +146,16 @@ public class MovieDetailed extends MovieBasic
     /**
      * Represents the country that produced the movie.
      */
-    public class ProductionCountry
-    {
+    public class ProductionCountry {
         @SerializedName("iso_3166_1")
         private String iso;
         private String name;
 
-        public String getIso()
-        {
+        public String getIso() {
             return iso;
         }
 
-        public String getName()
-        {
+        public String getName() {
             return name;
         }
     }
@@ -189,19 +163,16 @@ public class MovieDetailed extends MovieBasic
     /**
      * Represents the movie's spoken language.
      */
-    public class SpokenLanguage
-    {
+    public class SpokenLanguage {
         @SerializedName("iso_369_1")
         private String iso;
         private String name;
 
-        public String getIso()
-        {
+        public String getIso() {
             return iso;
         }
 
-        public String getName()
-        {
+        public String getName() {
             return name;
         }
     }
