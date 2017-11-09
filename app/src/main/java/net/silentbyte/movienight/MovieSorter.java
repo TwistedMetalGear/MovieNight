@@ -34,8 +34,7 @@ public class MovieSorter {
     }
 
     private static void sortByReleaseDate(List<Movie> movies) {
-        Collections.sort(movies, (movie1, movie2) ->
-        {
+        Collections.sort(movies, (movie1, movie2) -> {
             String movie1ReleaseDate = movie1.getReleaseDate();
             String movie2ReleaseDate = movie2.getReleaseDate();
 
@@ -70,8 +69,7 @@ public class MovieSorter {
     }
 
     private static void sortByUserRating(List<Movie> movies) {
-        Collections.sort(movies, (movie1, movie2) ->
-        {
+        Collections.sort(movies, (movie1, movie2) -> {
             // Sort by title if ratings are equal.
             if (movie1.getUserRating() == movie2.getUserRating()) {
                 return movie1.getTitle().compareTo(movie2.getTitle());

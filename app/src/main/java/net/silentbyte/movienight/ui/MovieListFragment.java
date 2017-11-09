@@ -125,8 +125,7 @@ public class MovieListFragment extends MovieBaseFragment {
 
         searchView.setOnSearchClickListener(v -> binding.addMovieButton.setVisibility(View.GONE));
 
-        searchView.setOnCloseListener(() ->
-        {
+        searchView.setOnCloseListener(() -> {
             // Add movie button should only be visible if this fragment is showing saved movies.
             if (getArguments().getString(ARG_QUERY) == null) {
                 binding.addMovieButton.setVisibility(View.VISIBLE);
@@ -193,8 +192,7 @@ public class MovieListFragment extends MovieBaseFragment {
         super.subscribeToViewModel();
 
         // Called when the user taps the add movie button.
-        binding.getViewModel().getAddMovieEvent().observe(this, aVoid ->
-        {
+        binding.getViewModel().getAddMovieEvent().observe(this, aVoid -> {
             binding.addMovieButton.setVisibility(View.GONE);
             View searchButton = searchView.findViewById(android.support.v7.appcompat.R.id.search_button);
             searchButton.callOnClick();
@@ -204,8 +202,7 @@ public class MovieListFragment extends MovieBaseFragment {
         binding.getViewModel().getRetryEvent().observe(this, aVoid -> loadMovies());
 
         // Called in response to the user deleting a movie from their saved movie list.
-        binding.getViewModel().getDeleteMovieEvent().observe(this, aVoid ->
-        {
+        binding.getViewModel().getDeleteMovieEvent().observe(this, aVoid -> {
             Snackbar snackbar = Snackbar.make(getView(), R.string.movie_deleted, Snackbar.LENGTH_LONG);
             snackbar.setAction(R.string.undo, view -> binding.getViewModel().undoDeleteMovie()).show();
         });
@@ -219,8 +216,7 @@ public class MovieListFragment extends MovieBaseFragment {
                 Snackbar.make(getView(), R.string.movie_restored, Snackbar.LENGTH_SHORT).show());
 
         // Called when there is an error undoing a movie delete.
-        binding.getViewModel().getUndoDeleteErrorEvent().observe(this, aVoid ->
-        {
+        binding.getViewModel().getUndoDeleteErrorEvent().observe(this, aVoid -> {
             Snackbar snackbar = Snackbar.make(getView(), R.string.undo_delete_error, Snackbar.LENGTH_LONG);
             snackbar.setAction(R.string.retry, view -> binding.getViewModel().undoDeleteMovie()).show();
         });
@@ -241,8 +237,7 @@ public class MovieListFragment extends MovieBaseFragment {
         PopupMenu popup = new PopupMenu(getContext(), getActivity().findViewById(R.id.sort_item));
         popup.getMenuInflater().inflate(R.menu.sort_menu, popup.getMenu());
 
-        popup.setOnMenuItemClickListener(menuItem ->
-        {
+        popup.setOnMenuItemClickListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.title:
                     sortMethod = SortMethod.TITLE;

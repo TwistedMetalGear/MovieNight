@@ -68,8 +68,7 @@ public class MovieDetailFragment extends MovieBaseFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_detail, container, false);
         binding.setViewModel((MovieDetailViewModel) viewModel);
 
-        binding.ratingBar.setOnTouchListener((view, motionEvent) ->
-        {
+        binding.ratingBar.setOnTouchListener((view, motionEvent) -> {
             binding.getViewModel().onUserRatingChanged(binding.ratingBar.getRating());
 
             if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -152,8 +151,7 @@ public class MovieDetailFragment extends MovieBaseFragment {
         super.subscribeToViewModel();
 
         // Called in response to a movie being saved.
-        binding.getViewModel().getSaveMovieEvent().observe(this, result ->
-        {
+        binding.getViewModel().getSaveMovieEvent().observe(this, result -> {
             addUpdatedMovieId(getArguments().getInt(ARG_MOVIE_ID));
 
             Intent intent = new Intent();

@@ -63,13 +63,11 @@ public class MovieListViewModel extends MovieBaseViewModel {
         disposables.add(repository.getSavedMovies()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(movies ->
-                        {
+                .subscribe(movies -> {
                             loading.set(false);
                             refreshMovies(movies, R.string.no_saved_movies);
                         },
-                        error ->
-                        {
+                        error -> {
                             loading.set(false);
                             this.error.set(true);
                         }));
@@ -90,13 +88,11 @@ public class MovieListViewModel extends MovieBaseViewModel {
         disposables.add(repository.searchDetailed(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(movies ->
-                        {
+                .subscribe(movies -> {
                             loading.set(false);
                             refreshMovies(movies, R.string.no_search_results);
                         },
-                        error ->
-                        {
+                        error -> {
                             loading.set(false);
                             this.error.set(true);
                         }));
@@ -118,16 +114,14 @@ public class MovieListViewModel extends MovieBaseViewModel {
         disposables.add(repository.deleteMovie(movie)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(movies ->
-                        {
+                .subscribe(movies -> {
                             // Hold a reference to the deleted movie in case the user decides to undo.
                             deletedMovie = movie;
 
                             refreshMovies(movies, R.string.no_saved_movies);
                             deleteMovieEvent.call();
                         },
-                        error ->
-                        {
+                        error -> {
                             loading.set(false);
 
                             // Trigger an update on the movies list in order to refresh the RecyclerView.
@@ -148,8 +142,7 @@ public class MovieListViewModel extends MovieBaseViewModel {
         disposables.add(repository.restoreMovie(deletedMovie)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(movies ->
-                        {
+                .subscribe(movies -> {
                             refreshMovies(movies, R.string.no_saved_movies);
                             undoDeleteEvent.call();
                         },

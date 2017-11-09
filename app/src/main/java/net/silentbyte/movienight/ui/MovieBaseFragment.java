@@ -146,8 +146,7 @@ public abstract class MovieBaseFragment extends Fragment {
     }
 
     protected void subscribeToViewModel() {
-        viewModel.getQuerySuggestions().observe(this, movies ->
-        {
+        viewModel.getQuerySuggestions().observe(this, movies -> {
             // There is a potential for this callback to fire before searchView is initialized.
             // Specifically, when the user enters a search term and submits before the 400ms
             // delay in the search throttler (in MovieBaseViewModel) expires, and then performs
@@ -173,8 +172,7 @@ public abstract class MovieBaseFragment extends Fragment {
         searchView.setIconified(true);
     }
 
-    protected final MovieClickCallback movieClickCallback = movie ->
-    {
+    protected final MovieClickCallback movieClickCallback = movie -> {
         if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
             collapseSearchView();
             MovieDetailFragment fragment = MovieDetailFragment.newInstance(movie.getId());

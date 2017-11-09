@@ -12,8 +12,7 @@ public class SingleLiveData<T> extends MutableLiveData<T> {
     private boolean pending = false;
 
     public void observe(LifecycleOwner owner, final Observer<T> observer) {
-        super.observe(owner, t ->
-        {
+        super.observe(owner, t -> {
             if (pending) {
                 pending = false;
                 observer.onChanged(t);

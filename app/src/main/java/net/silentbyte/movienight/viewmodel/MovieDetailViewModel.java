@@ -54,8 +54,7 @@ public class MovieDetailViewModel extends MovieBaseViewModel {
         disposable = repository.getMovieById(movieId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(movie ->
-                        {
+                .subscribe(movie -> {
                             loading.set(false);
                             movieLoaded = true;
 
@@ -69,8 +68,7 @@ public class MovieDetailViewModel extends MovieBaseViewModel {
                                 userReview.set(movie.getUserReview());
                             }
                         },
-                        error ->
-                        {
+                        error -> {
                             loading.set(false);
                             this.error.set(true);
                         });
@@ -89,14 +87,12 @@ public class MovieDetailViewModel extends MovieBaseViewModel {
         disposable = repository.insertMovie(movie.get())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result ->
-                        {
+                .subscribe(result -> {
                             loading.set(false);
                             saveMovieEvent.setValue(result);
                         }
                         ,
-                        error ->
-                        {
+                        error -> {
                             loading.set(false);
                             saveMovieErrorEvent.call();
                         });

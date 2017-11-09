@@ -34,8 +34,7 @@ public class MovieSearcher {
      */
     public Single<List<Movie>> searchBasic(String title) {
         return movieApi.searchForMovie(title)
-                .map((movieSearchResponse) ->
-                {
+                .map((movieSearchResponse) -> {
                     List<MovieBasic> results = movieSearchResponse.getResults();
                     List<Movie> movies = new ArrayList<>();
 
@@ -67,8 +66,7 @@ public class MovieSearcher {
      */
     public Single<List<Movie>> searchDetailed(String title) {
         return movieApi.searchForMovie(title)
-                .flatMapObservable(movieSearchResponse ->
-                {
+                .flatMapObservable(movieSearchResponse -> {
                     List<Integer> movieIds = new ArrayList<Integer>();
                     List<MovieBasic> movies = movieSearchResponse.getResults();
 
@@ -87,8 +85,7 @@ public class MovieSearcher {
      */
     public Single<Movie> getMovieDetailed(int movieId) {
         return movieApi.getMovieDetail(movieId)
-                .map(movieDetailed ->
-                {
+                .map(movieDetailed -> {
                     Movie movie = new Movie();
 
                     movie.setId(movieDetailed.getId());

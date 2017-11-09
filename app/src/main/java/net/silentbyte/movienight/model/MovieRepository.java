@@ -38,8 +38,7 @@ public class MovieRepository {
 
         // Retrieve movies from database and set result on cache.
         return movieDatabase.movieDao().getMovies()
-                .flatMap(savedMovies ->
-                {
+                .flatMap(savedMovies -> {
                     refreshCache(savedMovies);
                     return Single.just(savedMovies);
                 });
@@ -72,11 +71,9 @@ public class MovieRepository {
         // For each result, it will check to see if that movie is in the local database.
         // If so, replace the movie in the result list with the one from the local database.
         return movieSearcher.searchDetailed(title)
-                .flatMap(movies ->
-                {
+                .flatMap(movies -> {
                     return movieDatabase.movieDao().getMovies()
-                            .map(savedMovies ->
-                            {
+                            .map(savedMovies -> {
                                 for (int i = 0; i < movies.size(); i++) {
                                     int index = savedMovies.indexOf(movies.get(i));
 
@@ -102,20 +99,17 @@ public class MovieRepository {
         }
 
         return movieDatabase.movieDao().getMovieById(movieId)
-                .onErrorResumeNext(error ->
-                {
+                .onErrorResumeNext(error -> {
                     if (error instanceof EmptyResultSetException) {
                         return Single.just(new Movie());
                     }
 
                     throw new Exception(error);
                 })
-                .flatMap(savedMovie ->
-                {
+                .flatMap(savedMovie -> {
                     if (savedMovie.getId() == 0) {
                         return movieSearcher.getMovieDetailed(movieId)
-                                .flatMap(movie ->
-                                {
+                                .flatMap(movie -> {
                                     addToCache(movie);
                                     return Single.just(movie);
                                 });
@@ -133,8 +127,7 @@ public class MovieRepository {
      */
     public Single<Boolean> insertMovie(Movie movie) {
         return movieDatabase.movieDao().getMovieById(movie.getId())
-                .onErrorResumeNext(error ->
-                {
+                .onErrorResumeNext(error -> {
                     // TODO: Probably not the most elegant solution to signal that there was no match in the DB. Is there a better way?
                     if (error instanceof EmptyResultSetException) {
                         return Single.just(new Movie());
@@ -142,10 +135,8 @@ public class MovieRepository {
 
                     throw new Exception(error);
                 })
-                .flatMap(savedMovie ->
-                {
-                    return Single.create(emitter ->
-                    {
+                .flatMap(savedMovie -> {
+                    return Single.create(emitter -> {
                         movie.setUpdateTime(System.currentTimeMillis() / 1000);
                         movieDatabase.movieDao().insertMovie(movie);
                         addToCache(movie);
@@ -165,8 +156,7 @@ public class MovieRepository {
      * local database and cache. Emits the updated cache.
      */
     public Single<List<Movie>> deleteMovie(Movie movie) {
-        return Single.create(emitter ->
-        {
+        return Single.create(emitter -> {
             movieDatabase.movieDao().deleteMovie(movie.getId());
             movieCache.remove(movie);
             emitter.onSuccess(movieCache);
@@ -178,8 +168,7 @@ public class MovieRepository {
      * from the local database and cache. Emits the updated cache.
      */
     public Single<List<Movie>> restoreMovie(Movie movie) {
-        return Single.create(emitter ->
-        {
+        return Single.create(emitter -> {
             movieDatabase.movieDao().insertMovie(movie);
             addToCache(movie);
             emitter.onSuccess(movieCache);
