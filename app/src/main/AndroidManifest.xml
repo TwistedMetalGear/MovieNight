@@ -20,7 +20,7 @@
             android:name="android.max_aspect"
             android:value="2.1"/>
 
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".main.MovieActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

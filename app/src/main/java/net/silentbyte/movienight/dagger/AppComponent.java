@@ -1,7 +1,7 @@
 package net.silentbyte.movienight.dagger;
 
-import net.silentbyte.movienight.ui.MovieDetailFragment;
-import net.silentbyte.movienight.ui.MovieListFragment;
+import net.silentbyte.movienight.moviedetail.MovieDetailFragment;
+import net.silentbyte.movienight.movielist.MovieListFragment;
 
 import javax.inject.Singleton;
 

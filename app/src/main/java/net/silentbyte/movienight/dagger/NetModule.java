@@ -1,6 +1,6 @@
 package net.silentbyte.movienight.dagger;
 
-import net.silentbyte.movienight.tmdb.MovieApi;
+import net.silentbyte.movienight.data.source.remote.MovieApi;
 
 import javax.inject.Singleton;
 

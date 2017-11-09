@@ -4,7 +4,7 @@ import android.app.Application;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
-import net.silentbyte.movienight.db.MovieDatabase;
+import net.silentbyte.movienight.data.source.local.MovieDatabase;
 
 import javax.inject.Singleton;
 
