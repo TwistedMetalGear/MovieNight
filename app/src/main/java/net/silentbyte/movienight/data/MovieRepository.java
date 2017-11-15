@@ -39,10 +39,7 @@ public class MovieRepository {
 
         // Retrieve movies from database and set result on cache.
         return movieDatabase.movieDao().getMovies()
-                .flatMap(savedMovies -> {
-                    refreshCache(savedMovies);
-                    return Single.just(savedMovies);
-                });
+                .doOnSuccess(savedMovies -> refreshCache(savedMovies));
     }
 
     /**
@@ -83,9 +80,9 @@ public class MovieRepository {
                                     }
                                 }
 
-                                refreshCache(movies);
                                 return movies;
-                            });
+                            })
+                            .doOnSuccess(combinedMovies -> refreshCache(combinedMovies));
                 });
     }
 
@@ -109,17 +106,13 @@ public class MovieRepository {
                 })
                 .flatMap(savedMovie -> {
                     if (savedMovie.getId() == 0) {
-                        return movieSearcher.getMovieDetailed(movieId)
-                                .flatMap(movie -> {
-                                    addToCache(movie);
-                                    return Single.just(movie);
-                                });
+                        return movieSearcher.getMovieDetailed(movieId);
                     }
                     else {
-                        addToCache(savedMovie);
                         return Single.just(savedMovie);
                     }
-                });
+                })
+                .doOnSuccess(movie -> addToCache(movie));
     }
 
     /**
@@ -137,10 +130,9 @@ public class MovieRepository {
                     throw new Exception(error);
                 })
                 .flatMap(savedMovie -> {
-                    return Single.create(emitter -> {
+                    Single<Boolean> single = Single.create(emitter -> {
                         movie.setUpdateTime(System.currentTimeMillis() / 1000);
                         movieDatabase.movieDao().insertMovie(movie);
-                        addToCache(movie);
 
                         if (savedMovie.getId() == 0) {
                             emitter.onSuccess(true);
@@ -149,7 +141,10 @@ public class MovieRepository {
                             emitter.onSuccess(false);
                         }
                     });
-                });
+
+                    return single;
+                })
+                .doOnSuccess(result -> addToCache(movie));
     }
 
     /**
