@@ -7,7 +7,7 @@ It was built to showcase some of the latest and greatest Android technologies in
   * ViewModels
   * LiveData
   
-* Android Data Binding Framework
+* Android Data Binding Library
 
 * MVVM Architecture
 
