@@ -1,4 +1,4 @@
-package net.silentbyte.movienight.moviecommon;
+package net.silentbyte.movienight.movies;
 
 import android.databinding.BindingAdapter;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 import net.silentbyte.movienight.data.Movie;
-import net.silentbyte.movienight.movielist.MovieListAdapter;
+import net.silentbyte.movienight.movies.list.MovieListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

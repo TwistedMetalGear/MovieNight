@@ -1,4 +1,4 @@
-package net.silentbyte.movienight.main;
+package net.silentbyte.movienight.movies;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,8 +7,7 @@ import android.os.Bundle;
 
 import net.silentbyte.movienight.R;
 import net.silentbyte.movienight.data.source.remote.MovieApi;
-import net.silentbyte.movienight.moviecommon.MovieBaseFragment;
-import net.silentbyte.movienight.movielist.MovieListFragment;
+import net.silentbyte.movienight.movies.list.MovieListFragment;
 
 /**
  * Entry point of the application. This will initially show a MovieListFragment containing the user's saved movies.

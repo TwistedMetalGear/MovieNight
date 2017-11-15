@@ -2,6 +2,8 @@ package net.silentbyte.movienight.data;
 
 import android.arch.persistence.room.EmptyResultSetException;
 
+import net.silentbyte.movienight.data.Movie;
+import net.silentbyte.movienight.data.MovieRepository;
 import net.silentbyte.movienight.data.source.local.MovieDao;
 import net.silentbyte.movienight.data.source.local.MovieDatabase;
 import net.silentbyte.movienight.data.source.remote.MovieSearcher;

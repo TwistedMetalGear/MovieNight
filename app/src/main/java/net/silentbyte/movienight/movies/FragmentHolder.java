@@ -1,4 +1,4 @@
-package net.silentbyte.movienight.main;
+package net.silentbyte.movienight.movies;
 
 import android.support.v4.app.Fragment;
 

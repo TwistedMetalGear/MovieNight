@@ -1,4 +1,4 @@
-package net.silentbyte.movienight.movielist;
+package net.silentbyte.movienight.movies.list;
 
 import android.app.Application;
 import android.arch.lifecycle.ViewModel;
@@ -12,9 +12,9 @@ import net.silentbyte.movienight.util.MovieSorter;
 import net.silentbyte.movienight.util.MovieSorter.SortMethod;
 import net.silentbyte.movienight.R;
 import net.silentbyte.movienight.data.MovieRepository;
-import net.silentbyte.movienight.moviecommon.SingleLiveData;
+import net.silentbyte.movienight.util.SingleLiveData;
 import net.silentbyte.movienight.data.Movie;
-import net.silentbyte.movienight.moviecommon.MovieBaseViewModel;
+import net.silentbyte.movienight.movies.MovieBaseViewModel;
 
 import java.util.List;
 

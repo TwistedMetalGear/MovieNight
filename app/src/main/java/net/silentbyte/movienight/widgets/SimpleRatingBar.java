@@ -1,4 +1,4 @@
-package net.silentbyte.movienight.moviecommon;
+package net.silentbyte.movienight.widgets;
 
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;

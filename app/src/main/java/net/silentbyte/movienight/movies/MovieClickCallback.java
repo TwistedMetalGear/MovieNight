@@ -1,4 +1,4 @@
-package net.silentbyte.movienight.moviecommon;
+package net.silentbyte.movienight.movies;
 
 import net.silentbyte.movienight.data.Movie;
 

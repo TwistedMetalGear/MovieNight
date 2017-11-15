@@ -1,4 +1,4 @@
-package net.silentbyte.movienight.moviecommon;
+package net.silentbyte.movienight.movies;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -6,6 +6,7 @@ import android.databinding.ObservableBoolean;
 
 import net.silentbyte.movienight.data.MovieRepository;
 import net.silentbyte.movienight.data.Movie;
+import net.silentbyte.movienight.util.SingleLiveData;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
