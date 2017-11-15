@@ -9,6 +9,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="API key is missing. Please sign up with TheMovieDB and request an API key, then open the net.silentbyte.movienight.tmdb.MovieApi class and paste your key as the value of the API_KEY field."/>
+        android:text="API key is missing. Please sign up with TheMovieDB and request an API key, then open the net.silentbyte.movienight.data.source.remote.MovieApi class and paste your key as the value of the API_KEY field."/>
 
 </LinearLayout>
