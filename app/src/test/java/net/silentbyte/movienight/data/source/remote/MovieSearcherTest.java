@@ -1,10 +1,6 @@
 package net.silentbyte.movienight.data.source.remote;
 
 import net.silentbyte.movienight.data.Movie;
-import net.silentbyte.movienight.data.source.remote.MovieApi;
-import net.silentbyte.movienight.data.source.remote.MovieDetailed;
-import net.silentbyte.movienight.data.source.remote.MovieSearchResponse;
-import net.silentbyte.movienight.data.source.remote.MovieSearcher;
 import net.silentbyte.movienight.util.TestHelper;
 
 import org.junit.Before;

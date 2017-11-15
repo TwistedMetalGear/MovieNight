@@ -6,7 +6,6 @@ import android.arch.lifecycle.Observer;
 
 import net.silentbyte.movienight.data.Movie;
 import net.silentbyte.movienight.data.MovieRepository;
-import net.silentbyte.movienight.movies.list.MovieListViewModel;
 import net.silentbyte.movienight.util.MovieSorter.SortMethod;
 import net.silentbyte.movienight.util.TestHelper;
 
