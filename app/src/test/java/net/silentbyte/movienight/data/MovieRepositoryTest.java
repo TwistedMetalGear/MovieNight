@@ -8,7 +8,11 @@ import net.silentbyte.movienight.data.source.remote.MovieSearcher;
 import net.silentbyte.movienight.util.TestHelper;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +22,6 @@ import io.reactivex.observers.TestObserver;
 
 import static org.junit.Assert.*;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -32,6 +35,16 @@ public class MovieRepositoryTest {
     private List<Movie> localMovies;
     private List<Movie> remoteMovies;
 
+    @Mock
+    MovieDatabase movieDatabase;
+    @Mock
+    MovieDao movieDao;
+    @Mock
+    MovieSearcher movieSearcher;
+
+    @Rule
+    public MockitoRule mockitoRule = MockitoJUnit.rule();
+
     @Before
     public void createMovieLists() {
         localMovies = TestHelper.getLocalMovies();
@@ -40,10 +53,6 @@ public class MovieRepositoryTest {
 
     @Test
     public void getSavedMovies_returnsPopulatedList() {
-        MovieDatabase movieDatabase = mock(MovieDatabase.class);
-        MovieDao movieDao = mock(MovieDao.class);
-        MovieSearcher movieSearcher = mock(MovieSearcher.class);
-
         Single<List<Movie>> single = Single.create(emitter -> emitter.onSuccess(localMovies));
 
         when(movieDatabase.movieDao()).thenReturn(movieDao);
@@ -66,10 +75,6 @@ public class MovieRepositoryTest {
 
     @Test
     public void getSavedMovies_returnsEmptyList() {
-        MovieDatabase movieDatabase = mock(MovieDatabase.class);
-        MovieDao movieDao = mock(MovieDao.class);
-        MovieSearcher movieSearcher = mock(MovieSearcher.class);
-
         Single<List<Movie>> single = Single.create(emitter -> emitter.onSuccess(new ArrayList<>()));
 
         when(movieDatabase.movieDao()).thenReturn(movieDao);
@@ -92,9 +97,6 @@ public class MovieRepositoryTest {
 
     @Test
     public void searchBasic() {
-        MovieDatabase movieDatabase = mock(MovieDatabase.class);
-        MovieSearcher movieSearcher = mock(MovieSearcher.class);
-
         movieRepository = new MovieRepository(movieDatabase, movieSearcher);
 
         movieRepository.searchBasic(QUERY);
@@ -105,10 +107,6 @@ public class MovieRepositoryTest {
 
     @Test
     public void searchDetailed_returnsPopulatedList() {
-        MovieDatabase movieDatabase = mock(MovieDatabase.class);
-        MovieDao movieDao = mock(MovieDao.class);
-        MovieSearcher movieSearcher = mock(MovieSearcher.class);
-
         Single<List<Movie>> singleLocal = Single.create(emitter -> emitter.onSuccess(localMovies));
         Single<List<Movie>> singleRemote = Single.create(emitter -> emitter.onSuccess(remoteMovies));
 
@@ -133,10 +131,6 @@ public class MovieRepositoryTest {
 
     @Test
     public void searchDetailed_returnsEmptyList() {
-        MovieDatabase movieDatabase = mock(MovieDatabase.class);
-        MovieDao movieDao = mock(MovieDao.class);
-        MovieSearcher movieSearcher = mock(MovieSearcher.class);
-
         Single<List<Movie>> singleLocal = Single.create(emitter -> emitter.onSuccess(new ArrayList<>()));
         Single<List<Movie>> singleRemote = Single.create(emitter -> emitter.onSuccess(new ArrayList<>()));
 
@@ -161,16 +155,10 @@ public class MovieRepositoryTest {
 
     @Test
     public void getMovieById_returnsLocalMovie() {
-        MovieDatabase movieDatabase = mock(MovieDatabase.class);
-        MovieDao movieDao = mock(MovieDao.class);
-        MovieSearcher movieSearcher = mock(MovieSearcher.class);
-
         Single<Movie> singleLocal = Single.create(emitter -> emitter.onSuccess(localMovies.get(0)));
-        Single<Movie> singleRemote = Single.create(emitter -> emitter.onSuccess(remoteMovies.get(0)));
 
         when(movieDatabase.movieDao()).thenReturn(movieDao);
         when(movieDao.getMovieById(1)).thenReturn(singleLocal);
-        when(movieSearcher.getMovieDetailed(1)).thenReturn(singleRemote);
 
         movieRepository = new MovieRepository(movieDatabase, movieSearcher);
 
@@ -195,10 +183,6 @@ public class MovieRepositoryTest {
 
     @Test
     public void getMovieById_returnsRemoteMovie() {
-        MovieDatabase movieDatabase = mock(MovieDatabase.class);
-        MovieDao movieDao = mock(MovieDao.class);
-        MovieSearcher movieSearcher = mock(MovieSearcher.class);
-
         Single<Movie> singleLocal = Single.create(emitter -> {
             throw new EmptyResultSetException("");
         });
@@ -227,10 +211,6 @@ public class MovieRepositoryTest {
 
     @Test
     public void insertMovie_createsNewMovie() {
-        MovieDatabase movieDatabase = mock(MovieDatabase.class);
-        MovieDao movieDao = mock(MovieDao.class);
-        MovieSearcher movieSearcher = mock(MovieSearcher.class);
-
         Single<Movie> singleLocal = Single.create(emitter -> {
             throw new EmptyResultSetException("");
         });
@@ -249,10 +229,6 @@ public class MovieRepositoryTest {
 
     @Test
     public void insertMovie_replacesExistingMovie() {
-        MovieDatabase movieDatabase = mock(MovieDatabase.class);
-        MovieDao movieDao = mock(MovieDao.class);
-        MovieSearcher movieSearcher = mock(MovieSearcher.class);
-
         Single<Movie> singleLocal = Single.create(emitter -> emitter.onSuccess(localMovies.get(0)));
 
         when(movieDatabase.movieDao()).thenReturn(movieDao);
@@ -271,10 +247,6 @@ public class MovieRepositoryTest {
     public void deleteMovie() {
         // First, insert a movie, then retrieve it and verify that it comes from the cache.
         // Next, delete the movie and verify that the returned cache is empty.
-        MovieDatabase movieDatabase = mock(MovieDatabase.class);
-        MovieDao movieDao = mock(MovieDao.class);
-        MovieSearcher movieSearcher = mock(MovieSearcher.class);
-
         Single<Movie> singleLocal = Single.create(emitter -> {
             throw new EmptyResultSetException("");
         });
@@ -305,10 +277,6 @@ public class MovieRepositoryTest {
 
     @Test
     public void restoreMovie() {
-        MovieDatabase movieDatabase = mock(MovieDatabase.class);
-        MovieDao movieDao = mock(MovieDao.class);
-        MovieSearcher movieSearcher = mock(MovieSearcher.class);
-
         when(movieDatabase.movieDao()).thenReturn(movieDao);
 
         movieRepository = new MovieRepository(movieDatabase, movieSearcher);
@@ -328,10 +296,6 @@ public class MovieRepositoryTest {
 
     @Test
     public void invalidateCache_returnsTrue() {
-        MovieDatabase movieDatabase = mock(MovieDatabase.class);
-        MovieDao movieDao = mock(MovieDao.class);
-        MovieSearcher movieSearcher = mock(MovieSearcher.class);
-
         Single<Movie> singleLocal = Single.create(emitter -> {
             throw new EmptyResultSetException("");
         });
@@ -356,10 +320,6 @@ public class MovieRepositoryTest {
 
     @Test
     public void invalidateCache_returnsFalse() {
-        MovieDatabase movieDatabase = mock(MovieDatabase.class);
-        MovieDao movieDao = mock(MovieDao.class);
-        MovieSearcher movieSearcher = mock(MovieSearcher.class);
-
         Single<Movie> singleLocal = Single.create(emitter -> {
             throw new EmptyResultSetException("");
         });
