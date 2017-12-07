@@ -19,7 +19,7 @@ import io.reactivex.subjects.PublishSubject;
 /**
  * Base ViewModel for MovieListViewModel and MovieDetailViewModel. Implements common functionality.
  */
-public class MovieBaseViewModel extends AndroidViewModel {
+public abstract class MovieBaseViewModel extends AndroidViewModel {
 
     public final ObservableBoolean error = new ObservableBoolean(false);
 
