@@ -17,7 +17,10 @@ public class BindingAdapters {
 
     @BindingAdapter("url")
     public static void loadImage(ImageView view, String url) {
-        if (url != null) {
+        if (url == null) {
+            view.setImageDrawable(null);
+        }
+        else {
             Glide.with(view.getContext()).load(url).into(view);
         }
     }
