@@ -4,7 +4,7 @@ Movie Night is a simple app that lets you rate and review movies.
 It was built to showcase some of the latest and greatest Android technologies including:
 
 * Android Architecture Components
-  * ViewModels
+  * ViewModel
   * LiveData
   
 * Android Data Binding Library
