@@ -10,7 +10,7 @@ import retrofit2.http.Query;
  */
 public interface MovieApi {
 
-    String API_KEY = "INSERT_API_KEY_HERE";
+    String API_KEY = "ebd3891c3ac27955adee3c0cc254997c";
     String BASE_URL = "https://api.themoviedb.org/3/";
     String BASE_POSTER_URL = "http://image.tmdb.org/t/p/w500";
 

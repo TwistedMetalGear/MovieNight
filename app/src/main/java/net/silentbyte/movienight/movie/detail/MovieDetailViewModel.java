@@ -1,4 +1,4 @@
-package net.silentbyte.movienight.movies.detail;
+package net.silentbyte.movienight.movie.detail;
 
 import android.app.Application;
 import android.arch.lifecycle.ViewModel;
@@ -7,7 +7,7 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableFloat;
 
-import net.silentbyte.movienight.movies.MovieBaseViewModel;
+import net.silentbyte.movienight.movie.MovieBaseViewModel;
 import net.silentbyte.movienight.data.MovieRepository;
 import net.silentbyte.movienight.util.SingleLiveData;
 import net.silentbyte.movienight.data.Movie;

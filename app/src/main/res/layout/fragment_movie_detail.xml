@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="net.silentbyte.movienight.movies.detail.MovieDetailViewModel"/>
+            type="net.silentbyte.movienight.movie.detail.MovieDetailViewModel"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -173,7 +173,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/title"
                     tools:text="Action, Thriller"/>
 
-                <net.silentbyte.movienight.widgets.SimpleRatingBar
+                <net.silentbyte.movienight.movie.detail.SimpleRatingBar
                     android:id="@+id/rating_bar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -197,7 +197,7 @@
                     app:layout_constraintTop_toTopOf="@+id/title"
                     app:visibility_boolean="@{viewModel.modified || viewModel.movie.updateTime != 0}">
 
-                    <net.silentbyte.movienight.widgets.SimpleRatingBar
+                    <net.silentbyte.movienight.movie.detail.SimpleRatingBar
                         android:id="@+id/rating_star"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

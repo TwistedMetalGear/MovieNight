@@ -1,11 +1,11 @@
-package net.silentbyte.movienight.movies.list;
+package net.silentbyte.movienight.movie.list;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import net.silentbyte.movienight.movies.MovieClickCallback;
+import net.silentbyte.movienight.movie.MovieClickCallback;
 import net.silentbyte.movienight.R;
 import net.silentbyte.movienight.databinding.ListItemMovieBinding;
 import net.silentbyte.movienight.data.Movie;

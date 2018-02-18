@@ -1,4 +1,4 @@
-package net.silentbyte.movienight.movies.detail;
+package net.silentbyte.movienight.movie.detail;
 
 import android.app.Application;
 import android.arch.core.executor.testing.InstantTaskExecutorRule;

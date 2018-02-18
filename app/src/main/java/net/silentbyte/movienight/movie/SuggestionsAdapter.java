@@ -1,4 +1,4 @@
-package net.silentbyte.movienight.movies;
+package net.silentbyte.movienight.movie;
 
 import android.app.SearchManager;
 import android.content.Context;

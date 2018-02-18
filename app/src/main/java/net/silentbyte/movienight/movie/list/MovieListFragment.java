@@ -1,4 +1,4 @@
-package net.silentbyte.movienight.movies.list;
+package net.silentbyte.movienight.movie.list;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
@@ -19,7 +19,7 @@ import android.widget.Toast;
 import net.silentbyte.movienight.dagger.AppComponent;
 import net.silentbyte.movienight.dagger.AppModule;
 import net.silentbyte.movienight.dagger.DaggerAppComponent;
-import net.silentbyte.movienight.movies.MovieBaseFragment;
+import net.silentbyte.movienight.movie.MovieBaseFragment;
 import net.silentbyte.movienight.util.MovieSorter.SortMethod;
 import net.silentbyte.movienight.R;
 import net.silentbyte.movienight.databinding.FragmentMovieListBinding;

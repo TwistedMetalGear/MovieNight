@@ -1,4 +1,4 @@
-package net.silentbyte.movienight.movies.detail;
+package net.silentbyte.movienight.movie.detail;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -17,7 +17,7 @@ import net.silentbyte.movienight.dagger.AppComponent;
 import net.silentbyte.movienight.dagger.AppModule;
 import net.silentbyte.movienight.dagger.DaggerAppComponent;
 import net.silentbyte.movienight.databinding.FragmentMovieDetailBinding;
-import net.silentbyte.movienight.movies.MovieBaseFragment;
+import net.silentbyte.movienight.movie.MovieBaseFragment;
 
 import javax.inject.Inject;
 

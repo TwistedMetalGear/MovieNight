@@ -1,4 +1,4 @@
-package net.silentbyte.movienight.movies;
+package net.silentbyte.movienight.movie;
 
 import android.app.Activity;
 import android.arch.lifecycle.Lifecycle;
@@ -13,8 +13,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import net.silentbyte.movienight.R;
-import net.silentbyte.movienight.movies.detail.MovieDetailFragment;
-import net.silentbyte.movienight.movies.list.MovieListFragment;
+import net.silentbyte.movienight.movie.detail.MovieDetailFragment;
+import net.silentbyte.movienight.movie.list.MovieListFragment;
 
 import java.util.ArrayList;
 import java.util.List;

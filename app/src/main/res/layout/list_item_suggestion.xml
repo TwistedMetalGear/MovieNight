@@ -11,7 +11,7 @@
 
         <variable
             name="clickCallback"
-            type="net.silentbyte.movienight.movies.MovieClickCallback"/>
+            type="net.silentbyte.movienight.movie.MovieClickCallback"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
